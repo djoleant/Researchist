@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Neo4j.Driver;
-using Neo4j;
+using Neo4jClient;
+using Neo4jClient.Cypher;
 
+using System.Xml.Linq;
+using System.Collections;
+using Researchist.Models;
 
 namespace Researchist.Controllers
 {
@@ -9,31 +12,45 @@ namespace Researchist.Controllers
     [ApiController]
     public class HomeController : Controller
     {
-        private readonly IDriver driver;
-
-        public HomeController()
-        {
-            driver = GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "researchist"));
-        }
-
         [HttpPost]
         [Route("AddPerson/{name}/{surname}")]
         public async Task<IActionResult> AddPerson(string name, string surname)
         {
-            string q = "CREATE (person:Person {name: $name,surname:$surname})";
-            var statementParameters = new Dictionary<string, object>
-            {
-                {"name", name },
-                {"surname", surname}
-            };
-            var session = driver.AsyncSession();
-            if (session == null)
-                return StatusCode(404, "Ovo samo stavljamo zbog VS, ali je doslo do greske");
-            var result = await session.ExecuteWriteAsync(tx => tx.RunAsync(q, statementParameters));
-            return StatusCode(201, "Node has been created in the database");
-            
+            await client.Cypher.Create("(person:Person {name:\"" + name + "\",surname:\"" + surname+"\"})")
+                .ExecuteWithoutResultsAsync();
+            return Ok();
+
         }
 
+        [HttpGet]
+        [Route("GetPeople")]
+        public async Task<IActionResult> GetPeople()
+        {
+            var query = client.Cypher
+                .Match("(p:Person)")
+                .Return(p => p.As<Person>())
+                .Limit(5);
+            var lista = new List<Person>();
+            foreach (var person in await query.ResultsAsync)
+                lista.Add(person);
+            return Ok(lista);  
+
+        }
+
+        private BoltGraphClient client;
+        public HomeController()
+        {
+
+            client = new BoltGraphClient("bolt://localhost:7687", "neo4j", "researchist");
+            try
+            {
+                client.ConnectAsync().Wait();
+            }
+            catch (Exception exc)
+            {
+                
+            }
+        }
 
     }
 }
