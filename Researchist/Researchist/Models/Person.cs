@@ -10,8 +10,8 @@ namespace Researchist.Models
     }
     public class Person
     {
-        [JsonProperty("id")]
-        public int ID { get; set; }
+        //[JsonProperty("id")]
+        //public int ID { get; set; }
         [JsonProperty("name")]
         public string? Name { get; set; }
         [JsonProperty("surname")]

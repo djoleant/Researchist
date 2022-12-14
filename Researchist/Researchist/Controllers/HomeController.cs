@@ -12,6 +12,22 @@ namespace Researchist.Controllers
     [ApiController]
     public class HomeController : Controller
     {
+
+        private BoltGraphClient client;
+        public HomeController()
+        {
+
+            client = new BoltGraphClient("bolt://localhost:7687", "neo4j", "researchist");
+            try
+            {
+                client.ConnectAsync().Wait();
+            }
+            catch (Exception exc)
+            {
+                
+            }
+        }
+
         [HttpPost]
         [Route("AddPerson/{name}/{surname}")]
         public async Task<IActionResult> AddPerson(string name, string surname)
@@ -37,20 +53,31 @@ namespace Researchist.Controllers
 
         }
 
-        private BoltGraphClient client;
-        public HomeController()
-        {
+        //[HttpPut]
+        //[Route("UpdatePerson/{id}/{name}/{surname}")]
+        //public async Task<IActionResult> UpdatePerson(int id, string name,string surname)
+        //{
+        //    await client.Cypher
+        //        .Match("(n:Person)")
+        //        .Where((Person n) => n.ID == id)
+        //        .Set("n.name=\"" + name + "\",n.surname=\"" + surname + "\"")
+        //        .ExecuteWithoutResultsAsync();
+        //    return Ok();
 
-            client = new BoltGraphClient("bolt://localhost:7687", "neo4j", "researchist");
-            try
-            {
-                client.ConnectAsync().Wait();
-            }
-            catch (Exception exc)
-            {
-                
-            }
-        }
+        //}
+
+        //[HttpDelete]
+        //[Route("DeletePerson/{id}")]
+        //public async Task<IActionResult> UpdatePerson(int id)
+        //{
+        //    await client.Cypher
+        //        .Match("(n:Person)")
+        //        .Where((Person n) => n.ID == id)
+        //        .Delete("n")
+        //        .ExecuteWithoutResultsAsync();
+        //    return Ok();
+
+        //}
 
     }
 }
