@@ -1,11 +1,7 @@
 # Researchist
 Researchist is student project done for Advanced Databases subject at Faculty of Electronic Engineering, University of Niš.
-</br>
-<img src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" data-canonical-src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" width="280" height="240" />
 
-
-
-## ✨ Contributors
+## ✨ Contributors (Student, ID)
 
 * Emilija Ćojbašić, 18026
 * Matija Špeletić, 18043
@@ -28,7 +24,7 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 ```
 
 
-# ⚙️ Configuration options
+## ⚙️ Configuration options
 
 | Environment variable name | Default value | 
 | ------------------------- | ------------- |
@@ -38,3 +34,6 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 | NEO4J_PASSWORD | movies |
 | NEO4J_DATABASE | movies |
 | NEO4J_VERSION | 4 |
+
+</br>
+<img src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" data-canonical-src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" width="280" height="240" />
