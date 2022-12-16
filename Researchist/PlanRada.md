@@ -13,6 +13,7 @@
 - Proceedings
   - Osobe koje su tu
   - Radovi koji su tu
+  - Prikaz recenzenata
 
 - Kategorija
   - Svi radovi iz kategorije
@@ -23,6 +24,7 @@
   - Opis
   - Reference
   - Kantica za brisanje rada
+  - Prikaz recenzenata
   - Edit paper opcija (opis, naslov)
 
 - Create paper stranica
@@ -30,11 +32,18 @@
   - izbor autora
   - izbor referenci
   - izbor proceedinga
+  - izbor recenzenata
 
 - Kreiranje profila (?)
   - samo unos osnovnih info
 
 ## Backend (MEĐ)
+
+### Arhitektura
+
+![](./Arhitektura%20backend-a.jpg)
+
+### Funkcije kontrolera
 
 1. Pretrazivanje cvorova po stringu (vraca i osobe i radova) (Matija)
 2. Vraca info o osobi na osnovu ID (Ema)
@@ -63,3 +72,6 @@
 19. Vraca sve autore
 20. Vraca sve proceeding-e na osnovu ID kategorije
 21. Kreiranje nove osobe na osnovu imena, prezimena, kontakte, uloge...
+
+22. Vraca recenzente rada na osnovu ID rada
+23. Vraca recenzente na proceeding-u na osnovu ID proceeding-a
