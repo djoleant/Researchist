@@ -10,7 +10,7 @@ namespace Researchist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : Controller
+    public class HomeController : Controller // Matijin kontroler
     {
 
         private BoltGraphClient client;
