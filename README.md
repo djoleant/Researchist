@@ -21,6 +21,8 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 > git clone https://github.com/djoleant/Researchist.git
 > cd Researchist
 > # TODO: complete init steps
+
+> bin/neo4j start
 ```
 
 
