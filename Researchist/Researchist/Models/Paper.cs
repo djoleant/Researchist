@@ -12,7 +12,7 @@ namespace Researchist.Models
         public string Description { get; set; }
 
         [JsonProperty("date")]
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
 
         [JsonProperty("link")]
         public string Link { get; set; }
