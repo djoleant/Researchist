@@ -112,25 +112,6 @@ namespace Researchist.Controllers
 
             return Ok(result.Result.FirstOrDefault());
 
-            //return new JsonResult(new
-            //{
-            //    succeeded = true,
-            //    paper = new
-            //    {
-            //        result.Result.
-
-            //    }
-
-            //});
-
-            //var lista = new List<Paper>();
-            //foreach (var paper in await result.ResultsAsync)
-            //    lista.Add(paper);
-
-            //return Ok(lista);
-
-
-
 
         }
 
