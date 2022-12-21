@@ -97,5 +97,43 @@ namespace Researchist.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetDetails/{paper_title}")]
+        public async Task<IActionResult> GetDetails(string paper_title)
+        {
+
+
+            var result = client.Cypher
+                .Match("(paper:Paper)")
+                .Where((Paper paper) => paper.Title == paper_title)
+                .Return(paper => paper.As<Paper>())
+                .ResultsAsync;
+
+
+            return Ok(result.Result.FirstOrDefault());
+
+            //return new JsonResult(new
+            //{
+            //    succeeded = true,
+            //    paper = new
+            //    {
+            //        result.Result.
+
+            //    }
+
+            //});
+
+            //var lista = new List<Paper>();
+            //foreach (var paper in await result.ResultsAsync)
+            //    lista.Add(paper);
+
+            //return Ok(lista);
+
+
+
+
+        }
+
+
     }
 }
