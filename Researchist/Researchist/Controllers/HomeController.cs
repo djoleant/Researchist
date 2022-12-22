@@ -28,6 +28,11 @@ namespace Researchist.Controllers
             }
         }
 
+        private async void NormalizeIDs()
+        {
+            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
+        }
+
         [HttpPost]
         [Route("AddPerson/{name}/{surname}")]
         public async Task<IActionResult> AddPerson(string name, string surname)
@@ -50,6 +55,46 @@ namespace Researchist.Controllers
             foreach (var person in await query.ResultsAsync)
                 lista.Add(person);
             return Ok(lista);  
+
+        }
+
+        [HttpGet]
+        [Route("Search/{searchParam}")]
+        public async Task<IActionResult> Search(string searchParam) // 1
+        {
+            var query1 = client.Cypher
+                .Match("(p:Person)")
+                .Where((Person p)=>p.Name.Contains(searchParam) || p.Surname.Contains(searchParam))
+                .Return(p => p.As<Person>());
+            var people = new List<Person>();
+            foreach (var person in await query1.ResultsAsync)
+                people.Add(person);
+
+            var query2 = client.Cypher
+                .Match("(p:Paper)")
+                .Where((Paper p) => p.Title.Contains(searchParam))
+                .Return(p => p.As<Paper>());
+            var papers = new List<Paper>();
+            foreach(var paper in await query2.ResultsAsync)
+                papers.Add(paper);
+
+            return Ok(new {People=people,Papers=papers});
+
+        }
+
+        [HttpGet]
+        [Route("GetPersonCategories/{personID}")]
+        public async Task<IActionResult> GetPersonCategories(int personID) // 2
+        {
+            var query1 = client.Cypher
+                .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)-[r2:HAS]->(c:Category)")
+                .Where("id(pr)=" + personID)
+                .Return(c => c.As<Category>());
+            var categories = new List<Category>();
+            foreach (var cat in await query1.ResultsAsync)
+                categories.Add(cat);
+
+            return Ok(categories);
 
         }
 
