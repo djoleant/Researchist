@@ -70,13 +70,29 @@ namespace Researchist.Controllers
         }
 
         [HttpGet]
-        [Route("GetPaperReferences/{paperID}")]   // 14
-        public async Task<IActionResult> GetPaperReferences(int paperID)
+        [Route("GetPaperReferences1/{paperID}")]   // 14 - vraca sve radove koji referenciraju rad sa id-jem paperID 
+        public async Task<IActionResult> GetPaperReferences1(int paperID)
         {
             var result = client.Cypher
                 .Match("(po:Paper)-[r1:REFERENCES]->(pr:Paper)")
                 .Where("id(pr)=" + paperID)
                 .Return(po => po.As<Paper>());
+            var refpapers = new List<Paper>();
+            foreach (var p in await result.ResultsAsync)
+                refpapers.Add(p);
+
+            return Ok(refpapers);
+
+        }
+
+        [HttpGet]
+        [Route("GetPaperReferences2/{paperID}")]   // 14 - vraca sve radove koje rad sa id-jem paperID referencira
+        public async Task<IActionResult> GetPaperReferences2(int paperID)
+        {
+            var result = client.Cypher
+                .Match("(po:Paper)-[r1:REFERENCES]->(pr:Paper)")
+                .Where("id(po)=" + paperID)
+                .Return(pr => pr.As<Paper>());
             var refpapers = new List<Paper>();
             foreach (var p in await result.ResultsAsync)
                 refpapers.Add(p);
