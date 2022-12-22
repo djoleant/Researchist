@@ -24,7 +24,7 @@ namespace Researchist.Controllers
             }
             catch (Exception exc)
             {
-                
+
             }
         }
 
@@ -37,26 +37,12 @@ namespace Researchist.Controllers
         [Route("AddPerson/{name}/{surname}")]
         public async Task<IActionResult> AddPerson(string name, string surname)
         {
-            await client.Cypher.Create("(person:Person {name:\"" + name + "\",surname:\"" + surname+"\"})")
+            await client.Cypher.Create("(person:Person {name:\"" + name + "\",surname:\"" + surname + "\"})")
                 .ExecuteWithoutResultsAsync();
             return Ok();
 
         }
 
-        [HttpGet]
-        [Route("GetPeople")]
-        public async Task<IActionResult> GetPeople()
-        {
-            var query = client.Cypher
-                .Match("(p:Person)")
-                .Return(p => p.As<Person>())
-                .Limit(5);
-            var lista = new List<Person>();
-            foreach (var person in await query.ResultsAsync)
-                lista.Add(person);
-            return Ok(lista);  
-
-        }
 
         [HttpGet]
         [Route("Search/{searchParam}")]
@@ -64,7 +50,7 @@ namespace Researchist.Controllers
         {
             var query1 = client.Cypher
                 .Match("(p:Person)")
-                .Where((Person p)=>p.Name.Contains(searchParam) || p.Surname.Contains(searchParam))
+                .Where((Person p) => p.Name.Contains(searchParam) || p.Surname.Contains(searchParam))
                 .Return(p => p.As<Person>());
             var people = new List<Person>();
             foreach (var person in await query1.ResultsAsync)
@@ -75,16 +61,16 @@ namespace Researchist.Controllers
                 .Where((Paper p) => p.Title.Contains(searchParam))
                 .Return(p => p.As<Paper>());
             var papers = new List<Paper>();
-            foreach(var paper in await query2.ResultsAsync)
+            foreach (var paper in await query2.ResultsAsync)
                 papers.Add(paper);
 
-            return Ok(new {People=people,Papers=papers});
+            return Ok(new { People = people, Papers = papers });
 
         }
 
         [HttpGet]
         [Route("GetPersonCategories/{personID}")]
-        public async Task<IActionResult> GetPersonCategories(int personID) // 2
+        public async Task<IActionResult> GetPersonCategories(int personID) // 4
         {
             var query1 = client.Cypher
                 .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)-[r2:HAS]->(c:Category)")
@@ -98,31 +84,97 @@ namespace Researchist.Controllers
 
         }
 
-        //[HttpPut]
-        //[Route("UpdatePerson/{id}/{name}/{surname}")]
-        //public async Task<IActionResult> UpdatePerson(int id, string name,string surname)
-        //{
-        //    await client.Cypher
-        //        .Match("(n:Person)")
-        //        .Where((Person n) => n.ID == id)
-        //        .Set("n.name=\"" + name + "\",n.surname=\"" + surname + "\"")
-        //        .ExecuteWithoutResultsAsync();
-        //    return Ok();
+        [HttpPut]
+        [Route("UpdatePerson/{id}/{name}/{surname}/{contact}")]
+        public async Task<IActionResult> UpdatePerson(int id, string name, string surname, string contact) // 7
+        {
+            await client.Cypher
+                .Match("(n:Person)")
+                .Where("id(n)=" + id)
+                .Set("n.name=$name,n.surname=$surname,n.contact=$contact")
+                .WithParams(new { id, name, surname, contact })
+                .ExecuteWithoutResultsAsync();
+            return Ok();
 
-        //}
+        }
 
-        //[HttpDelete]
-        //[Route("DeletePerson/{id}")]
-        //public async Task<IActionResult> UpdatePerson(int id)
-        //{
-        //    await client.Cypher
-        //        .Match("(n:Person)")
-        //        .Where((Person n) => n.ID == id)
-        //        .Delete("n")
-        //        .ExecuteWithoutResultsAsync();
-        //    return Ok();
+        [HttpGet]
+        [Route("GetCategoryPapers/{categoryID}")]
+        public async Task<IActionResult> GetCategoryPapers(int categoryID) // 10
+        {
+            var query1 = client.Cypher
+                .Match("(p:Paper)-[r:HAS]->(c:Category)")
+                .Where("id(c)=$categoryID")
+                .WithParams(new { categoryID })
+                .Return(p => p.As<Paper>());
+            var papers = new List<Paper>();
+            foreach (var paper in await query1.ResultsAsync)
+                papers.Add(paper);
 
-        //}
+            return Ok(papers);
 
+        }
+
+        [HttpGet]
+        [Route("GetPaperAuthors/{paperID}")]
+        public async Task<IActionResult> GetPaperAuthors(int paperID) // 13
+        {
+            var query1 = client.Cypher
+                .Match("(pp:Paper)<-[r:WRITES]-(pr:Person)")
+                .Where("id(pp)=$paperID")
+                .WithParams(new { paperID })
+                .Return(pr => pr.As<Person>());
+            var authors = new List<Person>();
+            foreach (var person in await query1.ResultsAsync)
+                authors.Add(person);
+
+            return Ok(authors);
+
+        }
+
+        [HttpPut]
+        [Route("UpdatePaper/{id}/{title}/{description}")]
+        public async Task<IActionResult> UpdatePaper(int id, string title, string description) // 16
+        {
+            await client.Cypher
+                .Match("(n:Paper)")
+                .Where("id(n)=$id")
+                .Set("n.title=$title,n.description=$description")
+                .WithParams(new { id, title, description })
+                .ExecuteWithoutResultsAsync();
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Route("GetAllAuthors")]
+        public async Task<IActionResult> GetAllAuthors() // 19
+        {
+            var query = client.Cypher
+                .Match("(p:Person)-[r:WRITES]->(pp:Paper)")
+                .Return(p => p.As<Person>());
+            var lista = new List<Person>();
+            foreach (var person in await query.ResultsAsync)
+                lista.Add(person);
+            return Ok(lista);
+
+        }
+
+        [HttpGet]
+        [Route("GetPaperReviewers/{paperID}")]
+        public async Task<IActionResult> GetPaperReviewers(int paperID) // 22
+        {
+            var query1 = client.Cypher
+                .Match("(pp:Paper)<-[r:REVIEWS]-(pr:Person)")
+                .Where("id(pp)=$paperID")
+                .WithParams(new { paperID })
+                .Return(pr => pr.As<Person>());
+            var authors = new List<Person>();
+            foreach (var person in await query1.ResultsAsync)
+                authors.Add(person);
+
+            return Ok(authors);
+
+        }
     }
 }
