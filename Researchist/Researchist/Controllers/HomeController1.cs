@@ -102,7 +102,7 @@ namespace Researchist.Controllers
         }
 
         [HttpGet]
-        [Route("GetCategoryProceedings/{categoryID}")]   // 20 ????
+        [Route("GetCategoryProceedings/{categoryID}")]   // 20 
         public async Task<IActionResult> GetCategoryProceedings(int categoryID)
         {
             var result = client.Cypher
@@ -150,26 +150,5 @@ namespace Researchist.Controllers
 
         }
 
-        //[HttpGet]
-        //[Route("GetCoauthors/{authorID}")]   // 5
-        //public async Task<IActionResult> GetCoauthors(int authorID)
-        //{
-        //    var resultpapers = client.Cypher
-        //        .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)")
-        //        .Where("id(pr)=" + authorID)
-        //        .Return(pr => pr.As<Paper>());
-
-        //    var people = new List<Person>();
-        //    foreach (var ps in await resultpapers.ResultsAsync)
-        //    {
-        //        var coauth = client.Cypher
-        //            .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)")
-        //            .Where("id(pp)=" + ps.id)
-        //            .Where("id(pr)!=" + authorID)
-        //            .Return(pr => pr.As<Person>());
-        //    }
-        //    return Ok(people.Distinct());
-
-        //}
     }
 }
