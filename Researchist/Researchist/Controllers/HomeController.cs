@@ -28,21 +28,6 @@ namespace Researchist.Controllers
             }
         }
 
-        private async void NormalizeIDs()
-        {
-            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
-        }
-
-        [HttpPost]
-        [Route("AddPerson/{name}/{surname}")]
-        public async Task<IActionResult> AddPerson(string name, string surname)
-        {
-            await client.Cypher.Create("(person:Person {name:\"" + name + "\",surname:\"" + surname + "\"})")
-                .ExecuteWithoutResultsAsync();
-            return Ok();
-
-        }
-
 
         [HttpGet]
         [Route("Search/{searchParam}")]
@@ -50,7 +35,8 @@ namespace Researchist.Controllers
         {
             var query1 = client.Cypher
                 .Match("(p:Person)")
-                .Where((Person p) => p.Name.Contains(searchParam) || p.Surname.Contains(searchParam))
+                .Where((Person p) => p.Name.Contains(searchParam) || p.Surname.Contains(searchParam) ||
+                    searchParam.Contains(p.Name) || searchParam.Contains(p.Surname))
                 .Return(p => p.As<Person>());
             var people = new List<Person>();
             foreach (var person in await query1.ResultsAsync)

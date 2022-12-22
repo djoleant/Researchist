@@ -2,46 +2,54 @@
 
 ## Frontend
 
-- Glavna strana za pretraživanje
-- Profil osobe
+- DJOLE:
+- Stranica kategorije (4)
+  - Svi radovi iz kategorije
+  - Sve osobe koje rade u toj kategoriji
+
+- SearchResults stranica za prikaz rezultata pretrage (4)
+
+- Profil osobe - Profile stranica (6)
   - Lista radova
   - Kategorije na kojima je radio/la
   - Co-authors (?)
   - Proceedings u kojima je ta osoba
   - Edit person (institucija, kontakt, ime i prezime)
 
-- Proceedings
+
+- EMA:
+- Proceeding stranica (5)
   - Osobe koje su tu
   - Radovi koji su tu
   - Prikaz recenzenata
 
-- Kategorija
-  - Svi radovi iz kategorije
-  - Sve osobe koje rade u toj kategoriji
+- Glavna strana za pretraživanje - HomePage (2)
 
-- Paper
+- Stranica rada (6)
   - Autori
   - Opis
   - Reference
   - Kantica za brisanje rada
   - Prikaz recenzenata
   - Edit paper opcija (opis, naslov)
+  
 
-- Create paper stranica
+- MATIJA:
+- Create paper stranica (8)
   - izbor kategorije
   - izbor autora
   - izbor referenci
   - izbor proceedinga
   - izbor recenzenata
 
-- Kreiranje profila (?)
+- Kreiranje profila (4)
   - samo unos osnovnih info
 
 ## Backend (MEĐ)
 
 ### Arhitektura
 
-![](./Arhitektura%20backend-a.jpg)
+!["Architecture"](./Arhitektura%20backend-a.jpg)
 
 ### Funkcije kontrolera
 
@@ -75,3 +83,10 @@
 
 22. Vraca recenzente rada na osnovu ID rada
 23. Vraca recenzente na proceeding-u na osnovu ID proceeding-a
+24. Kreira vezu REFERENCES (po ID) (match (p:Paper),(pr:Person) where id(p)=8 and id(pr)=5 create (p)<-[rel:WRITES]-(pr))
+
+25. Kreira vezu IS_PUBLISHED (po ID)
+26. Kreira vezu WRITES (po ID)
+27. Kreira vezu REVIEWS (po ID)
+
+28. Kreira vezu HAS (po ID)

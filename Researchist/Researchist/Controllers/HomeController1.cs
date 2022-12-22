@@ -28,6 +28,11 @@ namespace Researchist.Controllers
             }
         }
 
+         private async void NormalizeIDs()
+        {
+            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
+        }
+
         [HttpGet]
         [Route("GetPersonInfo/{personID}")]     // 2
         public async Task<IActionResult> GetPersonInfo(int personID) 
@@ -49,6 +54,8 @@ namespace Researchist.Controllers
         {
             await client.Cypher.Create("(paper:Paper {title:\"" + title + "\",description:\"" + description + "\",date:\"" + date + "\",link:\"" + link + "\"})")
                 .ExecuteWithoutResultsAsync();
+
+            NormalizeIDs();
             return Ok();
 
         }

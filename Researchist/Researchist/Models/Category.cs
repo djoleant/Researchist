@@ -4,7 +4,9 @@ namespace Researchist.Models
 {
     public class Category
     {
-        //public int ID { get; set; }
+        [JsonProperty("id")]
+        public int ID { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }   
     }

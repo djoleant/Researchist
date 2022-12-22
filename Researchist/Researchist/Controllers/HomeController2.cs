@@ -29,6 +29,10 @@ namespace Researchist.Controllers
             }
         }
 
+         private async void NormalizeIDs()
+        {
+            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
+        }
 
         [HttpGet]
         [Route("GetPapers/{name}/{surname}")]

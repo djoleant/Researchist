@@ -4,7 +4,9 @@ namespace Researchist.Models
 {
     public class Proceeding
     {
-        //public int ID { get; set; }
+        [JsonProperty("id")]
+        public int ID { get; set; }
+        
         [JsonProperty("title")]
         public string Title { get; set; }
 
