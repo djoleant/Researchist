@@ -157,5 +157,32 @@ namespace Researchist.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetPersonCoauthors/{personID}")]   // 5
+        public async Task<IActionResult> GetPersonCoauthors(int personID)
+        {
+            var result = client.Cypher
+                .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)")
+                .Where("id(pr)=" + personID)
+                .Return(pp => pp.As<Paper>());
+            var people = new List<Person>();
+
+            NormalizeIDs();
+            foreach (var p in await result.ResultsAsync)
+            {
+                var result2 = client.Cypher
+                .Match("(pr:Person)-[r1:WRITES]->(pp:Paper)")
+                .Where("id(pp)=" + p.ID)
+                //.Where("id(pr)<>" + personID)
+                .Return(pr => pr.As<Person>());
+
+                foreach (var pp in await result2.ResultsAsync)
+                    people.Add(pp);
+            }
+            people=people.Where(x => x.ID != personID).ToList();
+            return Ok(people.Distinct());
+
+        }
+
     }
 }
