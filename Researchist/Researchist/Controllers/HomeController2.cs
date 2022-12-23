@@ -282,6 +282,54 @@ namespace Researchist.Controllers
                 return Ok();
         }
 
+        [HttpPost]
+        [Route("Is_published/{paperID}/{proceedingID}")]
+        public async Task<IActionResult> Is_published(int paperID, int proceedingID)
+        {
+            //(paper)-[r:IS_PUBLISHED]->(proceeding)
+            await client.Cypher
+                .Match("(paper:Paper)", "(proceeding:Proceeding)")
+                .Where("id(paper)=" + paperID)
+                .AndWhere("id(proceeding)=" + proceedingID)
+                .Create("(paper)-[r:IS_PUBLISHED]->(proceeding)")
+                .ExecuteWithoutResultsAsync();
+
+                NormalizeIDs();
+                return Ok();
+        }
+
+        [HttpPost]
+        [Route("Writes/{personID}/{paperID}")]
+        public async Task<IActionResult> Writes(int personID, int paperID)
+        {
+            //(person)-[r:WRITES]->(paper)
+            await client.Cypher
+                .Match("(person:Person)", "(paper:Paper)")
+                .Where("id(person)=" + personID)
+                .AndWhere("id(paper)=" + paperID)
+                .Create("(person)-[r:WRITES]->(paper)")
+                .ExecuteWithoutResultsAsync();
+
+                NormalizeIDs();
+                return Ok();
+        }
+
+        [HttpPost]
+        [Route("Has/{paperID}/{categoryID}")]
+        public async Task<IActionResult> Has(int paperID, int categoryID)
+        {
+            //(paper)-[r:HAS]->(category)
+            await client.Cypher
+                .Match("(paper:Paper)", "(category:Category)")
+                .Where("id(paper)=" + paperID)
+                .AndWhere("id(category)=" + categoryID)
+                .Create("(paper)-[r:HAS]->(category)")
+                .ExecuteWithoutResultsAsync();
+
+                NormalizeIDs();
+                return Ok();
+        }
+
 
     }
 }
