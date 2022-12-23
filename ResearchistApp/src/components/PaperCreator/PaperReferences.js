@@ -13,6 +13,7 @@ import ChipTransferList from './ChipTransferList';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import PaperTransferList from './PaperTransferList';
 
 
 export default function References() {
@@ -40,17 +41,17 @@ export default function References() {
         // { id: 19, name: 'Vue.js' }
     ]);
 
-    const { values }=useFormikContext();
-    console.log(values);
+    const { values } = useFormikContext();
+    //console.log(values);
     const getPapers = async () => {
         let categoriesQuery = "";
         values.categories.forEach(cat => {
             categoriesQuery += "categoryIDs=" + cat.id + "&";
         })
-        const response = await fetch("http://localhost:5211/api/Home/GetCategoryPapers?"+categoriesQuery);
+        const response = await fetch("http://localhost:5211/api/Home/GetCategoryPapers?" + categoriesQuery);
         if (response.ok) {
             const fetchData = await response.json();
-            setPapers(fetchData.map(p=>({id:p.id,name:p.title})));
+            setPapers(fetchData);
         }
     }
 
@@ -71,7 +72,7 @@ export default function References() {
                         sx={{ p: 3 }}
                         variant="outlined"
                     >
-                        <ChipTransferList chipData={papers} leftTitle={"Available papers:"}
+                        <PaperTransferList papers={papers} leftTitle={"Available papers:"}
                             rightTitle={"Chosen references:"} fieldName={"references"} twoLine />
                     </Paper>
                 </Grid >
