@@ -245,5 +245,43 @@ namespace Researchist.Controllers
 
         }
 
+
+        // -----------------------------------------------
+        // -------------CREATE RELATIONSHIPS--------------
+        // -----------------------------------------------
+
+        [HttpPost]
+        [Route("References/{paper1ID}/{paper2ID}")]
+        public async Task<IActionResult> References(int paper1ID, int paper2ID)
+        {
+            //(paper1)-[r:REFERENCES]->(paper2)
+            await client.Cypher
+                .Match("(paper1:Paper)", "(paper2:Paper)")
+                .Where("id(paper1)=" + paper1ID)
+                .AndWhere("id(paper2)=" + paper2ID)
+                .Create("(paper1)-[r:REFERENCES]->(paper2)")
+                .ExecuteWithoutResultsAsync();
+
+                NormalizeIDs();
+                return Ok();
+        }
+
+        [HttpPost]
+        [Route("Reviews/{personID}/{paperID}")]
+        public async Task<IActionResult> Reviews(int personID, int paperID)
+        {
+            //(person)-[r:REVIEWS]->(paper)
+            await client.Cypher
+                .Match("(person:Person)", "(paper:Paper)")
+                .Where("id(person)=" + personID)
+                .AndWhere("id(paper)=" + paperID)
+                .Create("(person)-[r:REVIEWS]->(paper)")
+                .ExecuteWithoutResultsAsync();
+
+                NormalizeIDs();
+                return Ok();
+        }
+
+
     }
 }
