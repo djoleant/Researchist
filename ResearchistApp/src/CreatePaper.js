@@ -18,12 +18,15 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import * as Yup from 'yup';
 import { NavLink, useNavigate } from 'react-router-dom';
 import PaperBasicInfo from './components/PaperCreator/PaperBasicInfo';
+import ChooseCategories from './components/PaperCreator/PaperChooseCategories';
+import AuthorsAndReviewers from './components/PaperCreator/PaperAuthorsAndReviewers';
+import References from './components/PaperCreator/PaperReferences';
 
 
 
 
 //import { theme, useStyle } from './styles';
-const steps = ['Basic info', 'Professional skills', "Work experience", 'Aditional info'];
+const steps = ['Basic info', 'Categories', "Authors and reviewers", 'Refferences'];
 
 
 
@@ -35,11 +38,11 @@ export default function PaperCreator() {
             case 0:
                 return <React.Fragment><PaperBasicInfo /></React.Fragment>;
             case 1:
-                return <React.Fragment>page2</React.Fragment>;
+                return <React.Fragment><ChooseCategories /></React.Fragment>;
             case 2:
-                return <React.Fragment>page3</React.Fragment>;
+                return <React.Fragment><AuthorsAndReviewers /></React.Fragment>;
             case 3:
-                return <React.Fragment>page4</React.Fragment>;
+                return <React.Fragment><References /></React.Fragment>;
             default:
                 return <React.Fragment>Not Found</React.Fragment>;
         }
@@ -62,21 +65,33 @@ export default function PaperCreator() {
 
         // setActiveStep(activeStep + 1);
         // alert("Objekat je u console log")
-        const response = await fetch("http://localhost:7240/CV/CreateCV", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
-        })
-        actions.setSubmitting(false);
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            setActiveStep(activeStep + 1);
+
+        // const response = await fetch("http://localhost:7240/CV/CreateCV", {
+        //     method: "POST",
+        //     credentials: "include",
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(values)
+        // })
+        // actions.setSubmitting(false);
+        // if (response.ok) {
+        //     const data = await response.json();
+        //     console.log(data);
+        //     setActiveStep(activeStep + 1);
+        // }
+        const resp1 = await fetch("http://localhost:5211/api/HomeController1/AddPaper/" +
+            encodeURIComponent(values.title) + "/" + encodeURIComponent(values.description) + "/" +
+            values.date + "/" + encodeURIComponent(values.link));
+        if (!resp1.ok) {
+            alert("Greska u kreiranju rada!");
+            return;
         }
+        // values.categories.forEach(cat => {
+        //     const resp=await fetch()
+        // })
+
     }
 
     function _handleSubmit(values, actions) {
@@ -123,15 +138,17 @@ export default function PaperCreator() {
         description: "",
         date: "",
         categories: [],
-        refferences: [],
+        references: [],
         authors: [],
+        reviewers: [],
 
     });
 
     const cvValidationSchema = Yup.object().shape({
         title: Yup.string().required("The title is required"),
         description: Yup.string().required("Description is required"),
-        date: Yup.date().required("The date is required")
+        date: Yup.date().required("The date is required"),
+        link: Yup.string(),
         // city: Yup.string().required("The city is required is required"),
         // education: Yup.array()
         //     .of(
@@ -219,7 +236,7 @@ export default function PaperCreator() {
                                 paperData
                             }
                             enableReinitialize
-                            validationSchema={cvValidationSchema}
+                            //validationSchema={cvValidationSchema}
                             onSubmit={_handleSubmit}
                         >
                             {({ isSubmitting }) => (

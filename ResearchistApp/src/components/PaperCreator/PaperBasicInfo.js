@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Button, Paper, Divider } from '@mui/material';
-import TextInputField from '../CVFormFields/TextInputField';
-import {  useFormikContext } from 'formik';
+import TextInputField from './TextInputField';
+import { useFormikContext } from 'formik';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 export default function PaperBasicInfo() {
@@ -22,7 +22,7 @@ export default function PaperBasicInfo() {
                 <Grid container spacing={3} sx={{ mb: 4 }}>
 
                     <Grid item xs={12} >
-                        <TextInputField placeholder='Title' fullWidth variant="standard"
+                        <TextInputField required placeholder='Title' fullWidth variant="standard"
                             InputProps={{
                                 style: {
                                     fontSize: 50,
@@ -41,15 +41,20 @@ export default function PaperBasicInfo() {
                         />
                     </Grid>
                     <Grid item xs={12} >
-                        <TextInputField label={"Description"} name={"description"} fullWidth
+                        <TextInputField required label={"Description"} name={"description"} fullWidth
                             multiline rows={5}
 
                         />
                     </Grid>
                     <Grid item xs={12} >
-                    <TextInputField type="date" name={"date"} label={"Date"} fullWidth InputLabelProps={{
-                                    shrink: true,
-                                }} />
+                        <TextInputField required type="date" name={"date"} label={"Date"} fullWidth InputLabelProps={{
+                            shrink: true,
+                        }} />
+                    </Grid>
+                    <Grid item xs={12} >
+                        <TextInputField label={"Link"} name={"link"} fullWidth
+                            defaultValue={""}
+                        />
                     </Grid>
                 </Grid>
             </Paper>
