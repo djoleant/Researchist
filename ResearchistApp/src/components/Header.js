@@ -20,7 +20,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Switch from "./ThemeSwitch";
 import { changeTheme } from "../App";
 import { Divider } from "@mui/material";
-import { logout } from "../actions/Auth";
+// import { logout } from "../actions/Auth";
 import { useTheme } from "@emotion/react";
 
 const pages = ["Home", "Internships", "Employers", "About"];
@@ -66,7 +66,7 @@ export const Header = (props) => {
   const handleMenuClick = async (option) => {
     console.log(option);
     if (option === "Logout") {
-      await logout();
+      //await logout();
       localStorage.setItem("role", "Guest");
       reloadHeader();
       navigate("/SignIn")

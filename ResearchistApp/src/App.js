@@ -1,30 +1,20 @@
 import logo from "./logo.svg";
 import * as React from "react";
 import "./App.css";
-import SignIn from "./SignIn";
-import Register from "./Register";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { Routes, Route, Link } from "react-router-dom";
 import Header from "./components/Header";
 import { Component } from "react";
-import CVCreator from "./CVCreator";
-import CVGenerator from "./CVGenerator";
-import EmployerInfoPage from "./EmployerInfoPage";
-import EmployerRatingPage from "./EmployerRatingPage";
-import StudentProfilePage from "./StudentProfilePage";
-import Internships from "./Internships";
-import EmployerInternsipPage from "./EmployerInternshipPage";
-import Employers from "./Employers";
-import InternshipCreator from "./InternshipCreator";
+
 import HomePage from "./HomePage";
 import AboutUsPage from "./AboutUsPage";
-import Redirect from "./components/Redirect";
-import Profile from "./components/Profile";
-import { loadUserData, clearData } from "./actions/Auth";
+
+
 import NotFoundPage from "./components/NotFoundPage";
-import SuccessRating from "./components/SuccessRating";
-import AdminPage from "./AdminPage";
+
+import PaperCreator from "./CreatePaper";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -221,8 +211,8 @@ export default function App() {
   );
 
   React.useEffect(() => {
-    clearData();
-    loadUserData();
+    // clearData();
+    // loadUserData();
   }, [])
 
   // Update the theme only if the mode changes
@@ -265,6 +255,15 @@ export default function App() {
             element={
               <Header
                 Component={NotFoundPage}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/CreatePaper"
+            element={
+              <Header
+                Component={PaperCreator}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }
