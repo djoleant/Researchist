@@ -19,7 +19,7 @@ import PaperCard from "./components/Categories/PaperCard";
 import { useParams } from "react-router-dom";
 
 
-export default function SearchResults(props) {
+export default function Search(props) {
   const [search, setSearch] = useState("");
   const [CategoryData, setCategoryData] = useState([]);
   
@@ -48,14 +48,15 @@ export default function SearchResults(props) {
       <CssBaseline />
       <React.Fragment>
         <Paper sx={{ p: 3, mb: 4 }} variant="outlined">
-          {CategoryData.map((info, index) => (
+        <Typography variant='h6' align="left">UNDER CONSTRUCTION</Typography>
+          {/* {CategoryData.map((info, index) => (
             <Grid item xs={12} md={6} lg={4} key={index}>
               <PaperCard
                 title={info.name}
                 id={info.id}
               />
             </Grid>
-          ))}
+          ))} */}
         </Paper>
       </React.Fragment>
     </Container>

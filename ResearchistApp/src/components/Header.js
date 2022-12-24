@@ -23,7 +23,7 @@ import { Divider } from "@mui/material";
 // import { logout } from "../actions/Auth";
 import { useTheme } from "@emotion/react";
 
-const pages = ["Home", "Internships", "Employers", "About"];
+const pages = ["Home", "Search", "Categories", "CreatePaper", "About"];
 const settings = ["Account", "CV Creator", "CV Export", "Logout", "Admin Dashboard", "Post internship"];
 
 export const Header = (props) => {
@@ -118,7 +118,7 @@ export const Header = (props) => {
               component="div"
               sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             >
-              InternClix
+              Researchist
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

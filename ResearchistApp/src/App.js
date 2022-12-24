@@ -21,7 +21,7 @@ import CreateProfile from "./CreateProfile";
 
 import PaperInfoPage from "./PaperInfoPage";
 import ProceedingPage from "./ProceedingPage";
-import SearchResults from "./SearchResults";
+import Search from "./Search";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -334,10 +334,10 @@ export default function App() {
             }
           />
           <Route
-            path="/SearchResults"
+            path="/Search"
             element={
               <Header
-                Component={SearchResults}
+                Component={Search}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }
