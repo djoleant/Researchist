@@ -115,7 +115,7 @@ export default function ProfilePage({ type, reloadHeader }) {
                     <Tabs value={value} variant="scrollable" scrollButtons onChange={handleChange} aria-label="basic tabs example" >
                         <Tab label="Papers" />
                         <Tab label="Proceedings" sx={{ display: type === "public" ? "none" : "" }} />
-                        <Tab label="Categories" sx={{ display: type === "public" ? "none" : "" }} />
+                        {/* <Tab label="Categories" sx={{ display: type === "public" ? "none" : "" }} /> */}
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
@@ -124,9 +124,9 @@ export default function ProfilePage({ type, reloadHeader }) {
                 <TabPanel value={value} index={1}>
                     <CardList type="proceedings" />
                 </TabPanel>
-                <TabPanel value={value} index={2}>
+                {/* <TabPanel value={value} index={2}>
                     <CardList type="categories" />
-                </TabPanel>
+                </TabPanel> */}
 
             </Box>
 
