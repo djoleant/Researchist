@@ -21,7 +21,6 @@ import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import ComboBox from "./components/ComboBox";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import Statistics from "./components/AboutUs/Statistics";
 //import background from "./resources/stojny.jpg";
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import SearchIcon from '@mui/icons-material/Search';
