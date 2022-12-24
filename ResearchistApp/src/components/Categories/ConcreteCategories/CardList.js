@@ -18,7 +18,7 @@ export default function CardList({ type }) {
           credentials: "include",
         }
       );
-    } else if (type === "proceedings") {
+    } else if (type === "people") {
       response = await fetch(
         "http://localhost:5211/api/HomeController2/GetPeopleFromCategory/" + id,
         {
@@ -44,7 +44,7 @@ export default function CardList({ type }) {
             title={type === "papers" ? info.title : info.name+" "+ info.surname}
             description={type === "papers" ? info.description : info.institution}
             date={type === "papers" ? info.date.split("T")[0] : info.contact}
-            link={type === "papers" ? info.link : "https://http://localhost:3000/ProfilePage/" + info.id}
+            link={type === "papers" ? info.link : "localhost:3000/ProfilePage/" + info.id}
           />
         </Grid>
       ))}

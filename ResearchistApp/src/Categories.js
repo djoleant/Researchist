@@ -35,7 +35,6 @@ export default function Categories(props) {
     const fetchData = await response.json();
     console.log(fetchData);
     setCategoryData(fetchData);
-    console.log(CategoryData);
   };
 
   useEffect(() => {

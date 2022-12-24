@@ -16,7 +16,33 @@ import { useParams } from 'react-router-dom';
 
 
 
-export default function ProfilePage({ type, reloadHeader }) {
+export default function ConcreteCategoryPage(props) {
+
+    const [search, setSearch] = useState("");
+    const [CategoryData, setCategoryData] = useState([]);
+    const [value, setValue] = React.useState(0);
+
+    const { id } = useParams();
+    const getCategories = async () => {
+      const response = await fetch(
+        "http://localhost:5211/api/HomeController2/GetCategoryName/" + id,
+        {
+          credentials: "include",
+        }
+      );
+  
+      const fetchData = await response.json();
+      console.log(fetchData);
+      setCategoryData(fetchData);
+    };
+  
+    useEffect(() => {
+      getCategories();
+    }, []);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const theme = useTheme();
 
@@ -41,51 +67,6 @@ export default function ProfilePage({ type, reloadHeader }) {
         );
     }
 
-    const [value, setValue] = React.useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    const [info, setInfo] = useState({
-        name: "",
-        lastName: "",
-        email: "",
-        city: "",
-        address: "",
-        phone: "",
-        picture: "",
-        skills: [],
-        languages: [],
-        education: [],
-        experience: [],
-        additionalInfo: []
-    });
-
-    const { id } = useParams();
-
-    const getInfo = async () => {
-        const response = await fetch("http://localhost:7240/CV/GetCV?studentId=" + (id != undefined ? id : ""), {
-            credentials: "include",
-            method: "POST"
-        });
-        if (response.ok) {
-            const fetchData = await response.json();
-            console.log(fetchData)
-            //if (fetchData.cv.education.length > 0) {
-            setInfo(fetchData.cv);
-            //}
-        }
-
-    }
-
-    const update = () => {
-        getInfo();
-        reloadHeader();
-    }
-
-    useEffect(() => {
-        getInfo();
-    }, []);
 
     return (
 
@@ -93,8 +74,8 @@ export default function ProfilePage({ type, reloadHeader }) {
             <CssBaseline />
             <Grid container spacing={3}  >
                 <Grid item xs={12} md={10}>
-                    <Typography variant='h3' align="left">{info != undefined ? info.name + " " + info.lastName : ""}</Typography>
-                    <Typography align="left">{info != undefined ? info.userName : ""}</Typography>
+                    <Typography variant='h6' align="left">Category</Typography>
+                    <Typography variant='h3' align="left">{CategoryData.name}</Typography>
                 </Grid>
 
             </Grid>
@@ -102,7 +83,7 @@ export default function ProfilePage({ type, reloadHeader }) {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider', position: "sticky", top: 65, mt: 4, zIndex: 20, backgroundColor: theme.palette.background.default }}>
                     <Tabs value={value} variant="scrollable" scrollButtons onChange={handleChange} aria-label="basic tabs example" >
                         <Tab label="Papers" />
-                        <Tab label="Proceedings" sx={{ display: type === "public" ? "none" : "" }} />
+                        <Tab label="People"/>
                         {/* <Tab label="Categories" sx={{ display: type === "public" ? "none" : "" }} /> */}
                     </Tabs>
                 </Box>
@@ -110,7 +91,7 @@ export default function ProfilePage({ type, reloadHeader }) {
                     <CardList type="papers" />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <CardList type="proceedings" />
+                    <CardList type="people" />
                 </TabPanel>
 
             </Box>

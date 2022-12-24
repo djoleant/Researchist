@@ -279,6 +279,21 @@ namespace Researchist.Controllers
             return Ok(lista);
         }
 
+        [HttpGet]
+        [Route("GetCategoryName/{categoryID}")]
+        public async Task<IActionResult> GetCategoryName(int categoryID)
+        {
+
+            var result = client.Cypher
+                .Match("(category:Category)")
+                .Where("id(category)=" + categoryID)
+                .Return(category => category.As<Category>())
+                .ResultsAsync;
+
+
+            return Ok(result.Result.FirstOrDefault());
+
+        }
 
         // -----------------------------------------------
         // -------------CREATE RELATIONSHIPS--------------
