@@ -48,33 +48,23 @@ export default function ProfilePage({ type, reloadHeader }) {
 
     const [info, setInfo] = useState({
         name: "",
-        lastName: "",
-        email: "",
-        city: "",
-        address: "",
-        phone: "",
-        picture: "",
-        skills: [],
-        languages: [],
-        education: [],
-        experience: [],
-        additionalInfo: []
+        surname: "",
+        institution: "",
+        contact: "",
+        role: "",
+        id: "",
+        picture: ""
     });
 
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:7240/CV/GetCV?studentId=" + (id != undefined ? id : ""), {
-            credentials: "include",
-            method: "POST"
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetPersonInfo/" + id, {
+            credentials: "include"
         });
-        if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
-            //if (fetchData.cv.education.length > 0) {
-            setInfo(fetchData.cv);
-            //}
-        }
+            setInfo(fetchData);
 
     }
 
@@ -96,9 +86,9 @@ export default function ProfilePage({ type, reloadHeader }) {
                     <Avatar src={process.env.PUBLIC_URL + "/resources/" + info.picture} sx={{ width: 140, height: 140 }} />
                 </Grid>
                 <Grid item xs={12} md={10}>
-                    <Typography variant='h3' align="left">{info != undefined ? info.name + " " + info.lastName : ""}</Typography>
-                    <Typography align="left">{info != undefined ? info.userName : ""}</Typography>
-                    <Typography align="left">{info != undefined ? info.email : ""}</Typography>
+                    <Typography variant='h3' align="left">{info != undefined ? info.name + " " + info.surname : ", " + (info.role === 0 ? "Professor" : (info.role === 1 ? "Student" : "Mr/Mrs"))}</Typography>
+                    <Typography align="left">{info != undefined ? info.institution : ""}</Typography>
+                    <Typography align="left">{info != undefined ? info.contact : ""}</Typography>
                     <Box sx={{ display: type === "public" ? "none" : "flex", mt: 1 }}>
                         <EditStudentProfileDialog
                             currentPicture={info.picture}
