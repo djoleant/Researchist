@@ -17,6 +17,7 @@ import PaperCreator from "./CreatePaper";
 import ProfilePage from "./ProfilePage";
 import Categories from "./Categories";
 import ConcreteCategoryPage from "./ConcreteCategoryPage";
+import CreateProfile from "./CreateProfile";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -270,6 +271,15 @@ export default function App() {
             element={
               <Header
                 Component={PaperCreator}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/CreateProfile/:role"
+            element={
+              <Header
+                Component={CreateProfile}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }
