@@ -1,6 +1,7 @@
 import { Grid, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import PaperCard from "./PaperCard"
 
 
 export default function CardList({ type }) {
@@ -24,9 +25,8 @@ export default function CardList({ type }) {
         else
             return;
         const data = await response.json();
-        console.log(data)
-        if (data.succeeded)
-            setInfos(data.infos);
+        console.log(data);
+        setInfos(data);
     }
 
     useEffect(() => {
@@ -35,10 +35,11 @@ export default function CardList({ type }) {
 
     return (
         <Grid container spacing={3}>
+            {console.log(infos)}
             {
                 infos.map((info, index) => (
                     <Grid item xs={12} md={6} lg={4} key={index}>
-                       
+                       <PaperCard title = {info.title} description = {info.description} date = {type === "papers" ? info.date.split('T')[0] : info.year} link = {info.link} />
                     </Grid>
                 ))
             }
