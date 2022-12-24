@@ -83,7 +83,7 @@ export default function ProfilePage({ type, reloadHeader }) {
             <CssBaseline />
             <Grid container spacing={3}  >
                 <Grid item xs={12} md={2} sx={{ display: "flex", justifyContent: "center" }}>
-                    <Avatar src={process.env.PUBLIC_URL + "/resources/" + info.picture} sx={{ width: 140, height: 140 }} />
+                    <Avatar src={process.env.PUBLIC_URL + "/public/images/djole.png" + info.picture} sx={{ width: 140, height: 140 }} />
                 </Grid>
                 <Grid item xs={12} md={10}>
                     <Typography variant='h3' align="left">{info != undefined ? info.name + " " + info.surname : ", " + (info.role === 0 ? "Professor" : (info.role === 1 ? "Student" : "Mr/Mrs"))}</Typography>
