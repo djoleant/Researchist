@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import CardActions from "@mui/material/CardActions";
+import EditPaperDialog from './EditPaper';
 
 export default function PaperInfoPage({ type, reloadHeader }) {
 
@@ -145,9 +146,16 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                     <Avatar src={process.env.PUBLIC_URL + "/resources/" + info.picture} sx={{ width: 140, height: 140 }} />
                 </Grid> */}
                 <Grid item xs={12} md={10}>
-                    <Typography variant='h3' align="left">{info != undefined ? info.title:""}</Typography>
-                    <Typography align="left">{info != undefined ? info.description : ""}</Typography>
+                    <Typography variant='h3' align="left">{info != undefined ? info.title:""} </Typography>
+                    <Typography align="left">{info != undefined ? info.description : ""}
+                    <EditPaperDialog
+                            currentTitle={info.title}
+                            currentDescription={info.description}
+                            update={update}
+                    />
+                    </Typography>
                 </Grid>
+                
 
             </Grid>
             <Box >
