@@ -120,7 +120,7 @@ namespace Researchist.Controllers
             foreach (var person in await query1.ResultsAsync)
                 authors.Add(person);
 
-            return Ok(authors);
+            return Ok(new { People = authors });
 
         }
 
@@ -179,7 +179,7 @@ namespace Researchist.Controllers
             foreach (var person in await query1.ResultsAsync)
                 authors.Add(person);
 
-            return Ok(authors);
+            return Ok(new { People = authors });
 
         }
     }

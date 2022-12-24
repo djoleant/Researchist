@@ -17,6 +17,10 @@ import PaperCreator from "./CreatePaper";
 import ProfilePage from "./ProfilePage";
 import Categories from "./Categories";
 import ConcreteCategoryPage from "./ConcreteCategoryPage";
+import CreateProfile from "./CreateProfile";
+
+import PaperInfoPage from "./PaperInfoPage";
+import ProceedingPage from "./ProceedingPage";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -275,6 +279,15 @@ export default function App() {
             }
           />
           <Route
+            path="/CreateProfile/:role"
+            element={
+              <Header
+                Component={CreateProfile}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
             path="/ProfilePage/:id"
             element={
               <Header
@@ -297,6 +310,24 @@ export default function App() {
             element={
               <Header
                 Component={ConcreteCategoryPage}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+           <Route
+            path="/PaperInfoPage"
+            element={
+              <Header
+                Component={PaperInfoPage}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/ProceedingPage"
+            element={
+              <Header
+                Component={ProceedingPage}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }

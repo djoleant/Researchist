@@ -20,7 +20,7 @@ export default function PaperCard({
     const navigate = useNavigate();
 
     return (
-        <Card variant="outlined" sx={{ p: 3, width: "100%" }}>
+        <Card variant="outlined" sx={{ p: 2, width: "100%" }}>
             <Grid container>
 
                 <Grid container item xs={12}>

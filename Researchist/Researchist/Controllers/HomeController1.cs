@@ -48,6 +48,21 @@ namespace Researchist.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetProceedingInfo/{proceedingID}")]     // 2
+        public async Task<IActionResult> GetProceedingInfo(int proceedingID)
+        {
+            var result = client.Cypher
+                .Match("(pr:Proceeding)")
+                .Where("id(pr)=" + proceedingID)
+                .Return(pr => pr.As<Proceeding>())
+                .ResultsAsync;
+
+
+            return Ok(result.Result.FirstOrDefault());
+
+        }
+
         [HttpPost]
         [Route("AddPaper/{title}/{description}/{date}/{link}")]   // 17
         public async Task<IActionResult> AddPaper(string title, string description, DateTime date, string link)
@@ -88,7 +103,7 @@ namespace Researchist.Controllers
             foreach (var p in await result.ResultsAsync)
                 refpapers.Add(p);
 
-            return Ok(refpapers);
+            return Ok(new { Papers = refpapers });
 
         }
 
@@ -104,7 +119,7 @@ namespace Researchist.Controllers
             foreach (var p in await result.ResultsAsync)
                 refpapers.Add(p);
 
-            return Ok(refpapers);
+            return Ok(new { Papers = refpapers });
 
         }
 
@@ -137,7 +152,7 @@ namespace Researchist.Controllers
             foreach (var p in await result.ResultsAsync)
                 people.Add(p);
 
-            return Ok(people);
+            return Ok(new { People = people});
 
         }
 
@@ -153,8 +168,25 @@ namespace Researchist.Controllers
             foreach (var p in await result.ResultsAsync)
                 people.Add(p);
 
-            return Ok(people);
+            return Ok(new { People = people });
 
+        }
+
+        [HttpGet]
+        [Route("GetProceedingPapers/{proceedingID}")]
+        public async Task<IActionResult> GetProceedingPapers(int proceedingID)
+        {
+
+            var result = client.Cypher
+                .Match("(paper:Paper)-[:IS_PUBLISHED]->(proceeding:Proceeding)")
+                .Where("id(proceeding)=" + proceedingID)
+                .Return(paper => paper.As<Paper>());
+
+            var lista = new List<Paper>();
+            foreach (var paper in await result.ResultsAsync)
+                lista.Add(paper);
+
+            return Ok(new { Papers = lista });
         }
 
         [HttpGet]

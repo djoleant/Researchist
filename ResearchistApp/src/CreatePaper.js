@@ -26,7 +26,7 @@ import References from './components/PaperCreator/PaperReferences';
 
 
 //import { theme, useStyle } from './styles';
-const steps = ['Basic info', 'Categories', "Authors and reviewers", 'Refferences'];
+const steps = ['Basic info', 'Categories', "Authors and reviewers", 'References'];
 
 
 
