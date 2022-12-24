@@ -10,7 +10,6 @@ import {
     Grid,
     useTheme
 } from '@mui/material';
-import CVInfo from './components/Profile/CVInfo';
 import CardList from './components/Profile/CardList';
 import EditStudentProfileDialog from './components/Profile/EditPerson';
 import { useParams } from 'react-router-dom';
