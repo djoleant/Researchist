@@ -23,7 +23,7 @@ import { Divider } from "@mui/material";
 // import { logout } from "../actions/Auth";
 import { useTheme } from "@emotion/react";
 
-const pages = ["Home", "Search", "Categories", "CreatePaper", "About"];
+const pages = ["Home", "Search", "Categories", "About"];
 const settings = ["Account", "CV Creator", "CV Export", "Logout", "Admin Dashboard", "Post internship"];
 
 export const Header = (props) => {
@@ -245,11 +245,8 @@ export const Header = (props) => {
                   </Box>
                 </> :
                 <>
-                  <MenuItem onClick={() => { navigate("/SignIn") }}>
-                    <Typography textAlign="center">Sign In</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={() => { navigate("/Register/student") }}>
-                    <Typography textAlign="center">Register</Typography>
+                  <MenuItem onClick={() => { navigate("/Createpaper") }}>
+                    <Typography textAlign="center">Create Paper</Typography>
                   </MenuItem >
                   <MenuItem onClick={ThemeHandler}>
                     <Switch checked={localStorage.getItem("mode") === "dark"} />
