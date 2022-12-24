@@ -11,33 +11,33 @@ import { Component } from "react";
 import HomePage from "./HomePage";
 import AboutUsPage from "./AboutUsPage";
 
-
 import NotFoundPage from "./components/NotFoundPage";
 
 import PaperCreator from "./CreatePaper";
+import ProfilePage from "./ProfilePage";
 
 const getDesignTokens = (mode) => ({
   palette: {
     mode,
     ...(mode === "light"
       ? {
-        // palette values for light mode
-        primary: {
-          main: '#536dfe',
-        },
-        secondary: {
-          main: '#f50057',
-        },
-      }
+          // palette values for light mode
+          primary: {
+            main: "#536dfe",
+          },
+          secondary: {
+            main: "#f50057",
+          },
+        }
       : {
-        // palette values for dark mode
-        primary: {
-          main: '#536dfe',
-        },
-        secondary: {
-          main: '#f50057',
-        },
-      }),
+          // palette values for dark mode
+          primary: {
+            main: "#536dfe",
+          },
+          secondary: {
+            main: "#f50057",
+          },
+        }),
   },
   overrides: {
     MuiSwitch: {
@@ -195,16 +195,21 @@ const themeOptions2 = createTheme({
 const themes = [themeOptions, themeOptions2];
 export let changeTheme;
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 export default function App() {
-  const [mode, setMode] = React.useState(localStorage.getItem("mode") ?? "light");
+  const [mode, setMode] = React.useState(
+    localStorage.getItem("mode") ?? "light"
+  );
   const colorMode = React.useMemo(
     () => ({
       // The dark mode switch would invoke this method
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-        localStorage.setItem("mode", localStorage.getItem("mode") === "light" ? "dark" : "light");
+        localStorage.setItem(
+          "mode",
+          localStorage.getItem("mode") === "light" ? "dark" : "light"
+        );
       },
     }),
     []
@@ -213,7 +218,7 @@ export default function App() {
   React.useEffect(() => {
     // clearData();
     // loadUserData();
-  }, [])
+  }, []);
 
   // Update the theme only if the mode changes
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
@@ -222,7 +227,6 @@ export default function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <Routes>
-
           <Route
             path="/Home"
             element={
@@ -264,6 +268,15 @@ export default function App() {
             element={
               <Header
                 Component={PaperCreator}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/ProfilePage/:id"
+            element={
+              <Header
+                Component={ProfilePage}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }

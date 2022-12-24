@@ -18,10 +18,20 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 ## 🚀 Quickstart
 
 ```bash
+> # Clone repository
 > git clone https://github.com/djoleant/Researchist.git
 > cd Researchist
-> # TODO: complete init steps
 
+> # Server start
+> cd Researchist/Researchist
+> dotnet watch run
+
+> # Client start
+> cd ../../ResearchistApp
+> npm install
+> npm start
+
+> # Start neo4j
 > bin/neo4j start
 ```
 
