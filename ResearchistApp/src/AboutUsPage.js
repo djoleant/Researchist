@@ -28,7 +28,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import Statistics from "./components/AboutUs/Statistics";
 
 export default function AboutUsPage(props) {
   return (
@@ -56,7 +55,7 @@ export default function AboutUsPage(props) {
             >
               GET TO KNOW{" "}
               <Link style={{ color: "#618fba", textDecoration: "none" }}>
-                INTERNCLIX
+                RESEARCHIST
               </Link>
             </Typography>
           </Grid>
@@ -82,27 +81,24 @@ export default function AboutUsPage(props) {
               align="center"
               sx={{ m: 2, color: "#bbbbbb" }}
             >
-              InternClix is beautiful. InternClix is beautiful. InternClix is
-              beautiful. InternClix is beautiful. InternClix is beautiful.
-              InternClix is beautiful. InternClix is beautiful. InternClix is
-              beautiful. InternClix is beautiful. InternClix is beautiful.
-              InternClix is beautiful. InternClix is beautiful.
+              Researchist is beautiful. Researchist is beautiful. Researchist is
+              beautiful. Researchist is beautiful. Researchist is beautiful.
+              Researchist is beautiful. Researchist is beautiful. Researchist is
+              beautiful. Researchist is beautiful. Researchist is beautiful.
+              Researchist is beautiful. Researchist is beautiful.
             </Typography>
           </Box>
 
           <Box sx={{ mb: 3 }} variant="outlined">
             <Divider sx={{ mt: 3, mb: 3 }}> WHAT DO WE OFFER? </Divider>
 
-            <Chip sx={{ m: 1 }} label="FIND INTERNSHIPS" />
-            <Chip sx={{ m: 1 }} label="SHARE WORK EXPERIENCES" />
-            <Chip sx={{ m: 1 }} label="RATE FORMER EMPLOYERS" />
-            <Chip sx={{ m: 1 }} label="CREATE AND EXPORT A CV" />
-            <Chip sx={{ m: 1 }} label="EXPLORE OFFERS" />
-            <Chip sx={{ m: 1 }} label="FIND EMPLOYEES" />
-            <Chip sx={{ m: 1 }} label="HIRE STUDENTS" />
-            <Chip sx={{ m: 1 }} label="RATE INTERNSHIPS" />
-            <Chip sx={{ m: 1 }} label="CHAT WITH EMPLOYERS" />
-            <Chip sx={{ m: 1 }} label="SEE INTERNSHIP COMPATIBILITY" />
+            <Chip sx={{ m: 1 }} label="FIND PAPERS" />
+            <Chip sx={{ m: 1 }} label="PUBLISH PAPERS" />
+            <Chip sx={{ m: 1 }} label="FIND PROCEEDINGS" />
+            <Chip sx={{ m: 1 }} label="FIND AUTHORS" />
+            <Chip sx={{ m: 1 }} label="EXPAND YOUR KNOWLEDGE" />
+            <Chip sx={{ m: 1 }} label="LET OTHERS SEE YOUR WORK" />
+            <Chip sx={{ m: 1 }} label="FREE FOREVER" />
           </Box>
 
           <Box sx={{ mb: 3 }} variant="outlined">
@@ -147,7 +143,7 @@ export default function AboutUsPage(props) {
                   Emilija Ćojbašić
                 </Typography>
                 <Typography>
-                  Emilija is one of the three lead developers of InternClix. She
+                  Emilija is one of the three lead developers of Researchist. She
                   has been a valuable member of the RuntimeTerror team since it
                   first started out in 2022.
                 </Typography>
@@ -226,7 +222,7 @@ export default function AboutUsPage(props) {
                   Djordje Antić
                 </Typography>
                 <Typography>
-                  Djordje is one of the three lead developers of InternClix. He
+                  Djordje is one of the three lead developers of Researchist. He
                   has been a valuable member of the RuntimeTerror team since it
                   first started out in 2022.
                 </Typography>
@@ -307,7 +303,7 @@ export default function AboutUsPage(props) {
                   Matija Špeletić
                 </Typography>
                 <Typography>
-                  Matija is one of the three lead developers of InternClix. He
+                  Matija is one of the three lead developers of Researchist. He
                   has been a valuable member of the RuntimeTerror team since it
                   first started out in 2022.
                 </Typography>
@@ -351,24 +347,6 @@ export default function AboutUsPage(props) {
               </Grid>
             </Grid>
 
-            <Divider sx={{ mt: 5, mb: 3 }}>
-              {" "}
-              WHAT ARE THE PLATFORM STATISTICS?{" "}
-            </Divider>
-            <Grid
-              container
-              style={{
-                marginTop: 3,
-                marginLeft: 1,
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-              spacing={3}
-              sx={{ mb: 4 }}
-            >
-              <Statistics />
-            </Grid>
 
             <Divider sx={{ mt: 5, mb: 3 }}>
               {" "}
