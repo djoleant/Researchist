@@ -15,6 +15,8 @@ import NotFoundPage from "./components/NotFoundPage";
 
 import PaperCreator from "./CreatePaper";
 import ProfilePage from "./ProfilePage";
+import Categories from "./Categories";
+import ConcreteCategoryPage from "./ConcreteCategoryPage";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -277,6 +279,24 @@ export default function App() {
             element={
               <Header
                 Component={ProfilePage}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/Categories"
+            element={
+              <Header
+                Component={Categories}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
+            path="/Categories/:id"
+            element={
+              <Header
+                Component={ConcreteCategoryPage}
                 ThemeHandler={colorMode.toggleColorMode}
               />
             }

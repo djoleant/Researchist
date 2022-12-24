@@ -245,6 +245,40 @@ namespace Researchist.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetPapersFromCategory/{categoryID}")]
+        public async Task<IActionResult> GetPapersFromCategory(int categoryID)
+        {
+
+            var result = client.Cypher
+                .Match("(paper:Paper)-[:HAS]->(category:Category)")
+                .Where("id(category)=" + categoryID)
+                .Return(paper => paper.As<Paper>());
+
+            var lista = new List<Paper>();
+            foreach (var paper in await result.ResultsAsync)
+                lista.Add(paper);
+
+            return Ok(lista);
+        }
+
+        [HttpGet]
+        [Route("GetPeopleFromCategory/{categoryID}")]
+        public async Task<IActionResult> GetPeopleFromCategory(int categoryID)
+        {
+
+            var result = client.Cypher
+                .Match("(person:Person)-[:WRITES]->(paper:Paper)-[:HAS]->(category:Category)")
+                .Where("id(category)=" + categoryID)
+                .Return(person => person.As<Person>());
+
+            var lista = new List<Person>();
+            foreach (var person in await result.ResultsAsync)
+                lista.Add(person);
+
+            return Ok(lista);
+        }
+
 
         // -----------------------------------------------
         // -------------CREATE RELATIONSHIPS--------------
