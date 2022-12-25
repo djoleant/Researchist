@@ -71,7 +71,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController2/GetDetails/"+id);
+        const response = await fetch("http://localhost:5211/api/Paper/GetDetails/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -82,7 +82,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperAuthors = async () => {
-        const response = await fetch("http://localhost:5211/api/Home/GetPaperAuthors/"+id);
+        const response = await fetch("http://localhost:5211/api/Paper/GetPaperAuthors/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -104,7 +104,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReferences = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences1/"+id);
+        const response = await fetch("http://localhost:5211/api/Paper/GetPaperReferences1/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -115,7 +115,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReferences2 = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences2/"+id);
+        const response = await fetch("http://localhost:5211/api/Paper/GetPaperReferences2/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)

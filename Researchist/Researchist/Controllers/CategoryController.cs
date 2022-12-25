@@ -96,6 +96,21 @@ namespace Researchist.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetCategories")]
+        public async Task<IActionResult> GetCategories()
+        {
+
+            var result = client.Cypher
+                .Match("(category:Category)")
+                .Return(category => category.As<Category>());
+
+            var lista = new List<Category>();
+            foreach (var category in await result.ResultsAsync)
+                lista.Add(category);
+
+            return Ok(lista);
+        }
 
         [HttpGet]
         [Route("GetPapersFromCategory/{categoryID}")]

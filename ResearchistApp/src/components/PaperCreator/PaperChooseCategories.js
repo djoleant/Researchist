@@ -41,7 +41,7 @@ export default function ChooseCategories() {
     ]);
 
     const getCategories = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController2/GetCategories"); 
+        const response = await fetch("http://localhost:5211/api/Category/GetCategories"); 
         if (response.ok) {
             const fetchData = await response.json();
             setCategories(fetchData);

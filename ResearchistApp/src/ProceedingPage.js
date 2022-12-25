@@ -66,7 +66,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingInfo/"+id);
+        const response = await fetch("http://localhost:5211/api/Proceeding/GetProceedingInfo/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -77,7 +77,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingPeople = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPeople/"+id);
+        const response = await fetch("http://localhost:5211/api/Proceeding/GetProceedingPeople/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -88,7 +88,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingReviewers = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingReviewers/"+id);
+        const response = await fetch("http://localhost:5211/api/Proceeding/GetProceedingReviewers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -99,7 +99,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingPapers = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPapers/"+id);
+        const response = await fetch("http://localhost:5211/api/Proceeding/GetProceedingPapers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)

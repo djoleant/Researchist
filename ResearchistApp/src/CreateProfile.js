@@ -60,7 +60,7 @@ export default function CreateProfile() {
             student: 1,
             other: 2
         }
-        fetch(`http://localhost:5211/api/HomeController2/AddPerson/${data.get("name")}/${data.get("surname")}/${roles[role]}/${encodeURIComponent(data.get("institution"))}/${encodeURIComponent(data.get("contact"))}`, {
+        fetch(`http://localhost:5211/api/Person/AddPerson/${data.get("name")}/${data.get("surname")}/${roles[role]}/${encodeURIComponent(data.get("institution"))}/${encodeURIComponent(data.get("contact"))}`, {
             method: "POST"
         }).then(r => {
             if (r.ok) {

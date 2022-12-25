@@ -13,14 +13,14 @@ export default function CardList({ type }) {
     let response;
     if (type === "papers") {
       response = await fetch(
-        "http://localhost:5211/api/HomeController2/GetPapersFromCategory/" + id,
+        "http://localhost:5211/api/Category/GetPapersFromCategory/" + id,
         {
           credentials: "include",
         }
       );
     } else if (type === "people") {
       response = await fetch(
-        "http://localhost:5211/api/HomeController2/GetPeopleFromCategory/" + id,
+        "http://localhost:5211/api/Category/GetPeopleFromCategory/" + id,
         {
           credentials: "include",
         }

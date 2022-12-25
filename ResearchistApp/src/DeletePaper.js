@@ -22,7 +22,7 @@ export default function EditPaperDialog({ id, update }) {
     };
 
     const handleSubmit = () => {
-        let fetchreq = "http://localhost:5211/api/HomeController2/DeletePaper/"+id;
+        let fetchreq = "http://localhost:5211/api/Paper/DeletePaper/"+id;
         fetchreq = encodeURI(fetchreq);
         fetch(fetchreq, {
             method: "DELETE",

@@ -25,7 +25,7 @@ export default function ConcreteCategoryPage(props) {
     const { id } = useParams();
     const getCategories = async () => {
       const response = await fetch(
-        "http://localhost:5211/api/HomeController2/GetCategoryName/" + id,
+        "http://localhost:5211/api/Category/GetCategoryName/" + id,
         {
           credentials: "include",
         }

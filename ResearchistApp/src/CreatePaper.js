@@ -54,7 +54,7 @@ export default function PaperCreator() {
 
     async function _submitForm(values, actions) {
         
-        const resp1 = await fetch("http://localhost:5211/api/HomeController1/AddPaper/" +
+        const resp1 = await fetch("http://localhost:5211/api/Paper/AddPaper/" +
             encodeURIComponent(values.title) + "/" + encodeURIComponent(values.description) + "/" +
             values.date + "/" + encodeURIComponent(values.link), { method: "POST" });
         if (!resp1.ok) {

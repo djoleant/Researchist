@@ -59,7 +59,7 @@ export default function ProfilePage({ type, reloadHeader }) {
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetPersonInfo/" + id, {
+        const response = await fetch("http://localhost:5211/api/Person/GetPersonInfo/" + id, {
             credentials: "include"
         });
             const fetchData = await response.json();
