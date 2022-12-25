@@ -12,12 +12,6 @@ namespace Researchist.Controllers
     [ApiController]
     public class RelationsController : Controller // Djoletov kontroler
     {
-        public enum PersonRole
-        {
-            Professor,
-            Student,
-            Other
-        }
 
         private BoltGraphClient client;
         public RelationsController()

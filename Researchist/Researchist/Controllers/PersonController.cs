@@ -12,19 +12,18 @@ namespace Researchist.Controllers
     [ApiController]
     public class PersonController : Controller // Matijin kontroler
     {
-        public enum PersonRole
+        private async void NormalizeIDs()
         {
-            Professor,
-            Student,
-            Other
+            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
         }
+
         private BoltGraphClient client;
         public PersonController()
         {
 
             client = new BoltGraphClient("bolt://localhost:7687", "neo4j", "researchist");
             try
-            
+
             {
                 client.ConnectAsync().Wait();
             }
@@ -246,9 +245,6 @@ namespace Researchist.Controllers
         }
 
 
-        private async void NormalizeIDs()
-        {
-            await client.Cypher.Match("(n)").Set("n.id=id(n)").ExecuteWithoutResultsAsync();
-        }
+
     }
 }
