@@ -33,13 +33,13 @@ export default function PaperCard({
     <Card variant="outlined" sx={{ p: 3, width: "100%" }}>
       <Grid container>
         <Grid container item xs={12}>
-          <Grid item xs={10} sx={{ display: "flex", flexDirection: "row" }}>
+          <Grid item xs={10} sx={{ display: "flex", flexDirection: "column" }}>
             <Link
               href={
                 type === "people" ?
                 "http://localhost:3000/ProfilePage/" + id
             :
-            "http://" + link
+            "http://localhost:3000/PaperInfoPage/" + id
         }
               variant="h5"
               align="left"
