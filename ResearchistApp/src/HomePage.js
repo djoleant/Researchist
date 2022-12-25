@@ -37,23 +37,23 @@ export default function HomePage(props) {
 
   const navigate = useNavigate();
 
-  const [searchData, setSearchData] = useState(null);
+  // const [searchData, setSearchData] = useState(null);
 
   const [search, setSearch] = useState("");
 
-  const getSearchData = async () => {
-    const response = await fetch("http://localhost:5211/api/Home/Search/" + search);
+  // const getSearchData = async () => {
+  //   const response = await fetch("http://localhost:5211/api/Home/Search/" + search);
 
-    console.log(search);
-    if (response.ok) {
-        const fetchData = await response.json();
-        console.log(fetchData);
-        setSearchData(fetchData);
-    }
-  };
+  //   console.log(search);
+  //   if (response.ok) {
+  //       const fetchData = await response.json();
+  //       console.log(fetchData);
+  //       setSearchData(fetchData);
+  //   }
+  // };
 
   const update = () => {
-    getSearchData();
+    //getSearchData();
     props.reloadHeader();
 }
 
@@ -61,18 +61,23 @@ export default function HomePage(props) {
     <Box>
       <CssBaseline />
       <React.Fragment>
+        <Paper style={{width:"70%",height:1000, margin: "auto", opacity:"80%"}}>
 
-        <Grid fullwidth style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginBottom: 20, marginTop:20 }}>
+        {/* //   opacity:"80%",
+        //   backgroundImage: theme.palette.mode === 'dark' ?
+        //     "url(" + process.env.PUBLIC_URL + "/images/im.jpg" + ")"
+        //     : "url(" + process.env.PUBLIC_URL + "/images/im.jpg" + ")" */}
+        <Grid fullwidth style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginBottom: 20 }}>
         <Avatar
                 variant="rounded"
                 alt="Remy Sharp"
-                src={theme.palette.mode === 'dark' ? process.env.PUBLIC_URL + "/images/employer2.jpg" : process.env.PUBLIC_URL + "/images/researchist.png"}
-                sx={{ width: 400, height: 190, marginRight: 1, justifySelf: "center" }}
+                src={theme.palette.mode === 'dark' ? process.env.PUBLIC_URL + "/images/rdark.png" : process.env.PUBLIC_URL + "/images/researchist.png"}
+                sx={{ width: 400, height: 190, marginRight: 1, justifySelf: "center", marginTop:20 }}
               />
-          <Typography style={{ alignSelf: "center", fontSize: 32, fontWeight: 800, marginTop: 10, marginBottom: 20 }}> Where research begins.</Typography>
+          <Typography style={{ alignSelf: "center", fontSize: 32, fontWeight: 800, marginTop: 10, color: "#7E32B0"}}> Where research begins.</Typography>
         </Grid>
 
-        <Grid fullwidth style={{ marginTop: 20, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "10%" }}>
+        <Grid fullwidth style={{ marginTop: 10, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "10%" }}>
         </Grid>
         {/* <Divider style={{ marginTop: 10, marginBottom: 20 }}></Divider> */}
         <Grid style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
@@ -87,9 +92,9 @@ export default function HomePage(props) {
                         </Grid>
 
                         <Button
-                            sx={{ m: 1, borderRadius: 50 }}
+                            sx={{ m: 1, borderRadius: 50, backgroundColor:"#7E32B0" }}
                             variant="contained"
-                            href="https://yahoo.com"
+                            href="https://yahoo.com" //ovo treba da vodi do djoletove stranice
                         >
                             {" "}
                             <SearchIcon size="large" />
@@ -97,44 +102,9 @@ export default function HomePage(props) {
 
                     </Grid>
 
-                    {searchData== undefined || searchData.people.length == 0 ? (<Typography>Currently no people to display</Typography>) : ""}
-                    {searchData != null && (
-                        <Grid container spacing={2}
-                        /*xs={12} md={6} lg={6}*/
-                        >
-
-                            {searchData.people
-                                // .filter(c => c.title.toLowerCase().includes(search.toLowerCase()))
-                                .map((cards, index) => {
-                                    // const { title, description, duration, compensation, skills, categories, id, address, wishlisted, picture, companyName } = cards;
-                                    console.log(cards);
-                                    return (
-                                        <Grid item xs={12} md={6} lg={4}>
-                                            {/* <SmallInternshipCard
-                                                index={index}
-                                                title={title}
-                                                description={description}
-                                                duration={duration}
-                                                compensation={compensation}
-                                                skills={skills}
-                                                categories={categories}
-                                                link={"/Internship/" + id}
-                                                location={address}
-                                                showBookmark={localStorage.getItem("role") === "Student"}
-                                                wishlisted={wishlisted}
-                                                internshipID={id}
-                                                picture={picture}
-                                                companyName={companyName}
-                                            /> */}
-                                        </Grid>
-
-                                    );
-                                })}
-                        </Grid>
-                    )}
-
-
+      </Paper>
       </React.Fragment>
+      
     </Box>
   );
 

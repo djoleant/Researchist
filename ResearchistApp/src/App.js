@@ -21,6 +21,7 @@ import CreateProfile from "./CreateProfile";
 
 import PaperInfoPage from "./PaperInfoPage";
 import ProceedingPage from "./ProceedingPage";
+import DeletedPaperPage from "./DeletedPaperPage";
 import Search from "./Search";
 
 const getDesignTokens = (mode) => ({
@@ -262,6 +263,15 @@ export default function App() {
             }
           />
           <Route
+            path="/DeletedPaper"
+            element={
+              <Header
+                Component={DeletedPaperPage}
+                ThemeHandler={colorMode.toggleColorMode}
+              />
+            }
+          />
+          <Route
             path="*"
             element={
               <Header
@@ -316,7 +326,7 @@ export default function App() {
             }
           />
           <Route
-            path="/PaperInfoPage"
+            path="/PaperInfoPage/:id"
             element={
               <Header
                 Component={PaperInfoPage}
@@ -325,7 +335,7 @@ export default function App() {
             }
           />
           <Route
-            path="/ProceedingPage"
+            path="/ProceedingPage/:id"
             element={
               <Header
                 Component={ProceedingPage}

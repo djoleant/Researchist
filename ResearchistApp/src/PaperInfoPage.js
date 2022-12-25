@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import CardActions from "@mui/material/CardActions";
 import EditPaperDialog from './EditPaper';
+import DeletePaperDialog from './DeletePaper';
 
 export default function PaperInfoPage({ type, reloadHeader }) {
 
@@ -70,7 +71,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController2/GetDetails/5");
+        const response = await fetch("http://localhost:5211/api/HomeController2/GetDetails/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -81,7 +82,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperAuthors = async () => {
-        const response = await fetch("http://localhost:5211/api/Home/GetPaperAuthors/5");
+        const response = await fetch("http://localhost:5211/api/Home/GetPaperAuthors/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -92,7 +93,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReviewers = async () => {
-        const response = await fetch("http://localhost:5211/api/Home/GetPaperReviewers/9");
+        const response = await fetch("http://localhost:5211/api/Home/GetPaperReviewers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -103,7 +104,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReferences = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences1/5");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences1/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -114,7 +115,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReferences2 = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences2/5");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetPaperReferences2/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -126,6 +127,11 @@ export default function PaperInfoPage({ type, reloadHeader }) {
 
     const update = () => {
         getInfo();
+        reloadHeader();
+    }
+
+    const update2 = () => {
+        navigate("/DeletedPaper");
         reloadHeader();
     }
 
@@ -148,12 +154,18 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                 <Grid item xs={12} md={10}>
                     <Typography variant='h3' align="left">{info != undefined ? info.title:""} </Typography>
                     <Typography align="left">{info != undefined ? info.description : ""}
+                    </Typography>
+                    <Grid container style={{display:"flex", marginTop:10}} >
                     <EditPaperDialog
                             currentTitle={info.title}
                             currentDescription={info.description}
                             update={update}
                     />
-                    </Typography>
+                    <DeletePaperDialog
+                            id={info.id}
+                            update={update2}
+                    />
+                    </Grid>
                 </Grid>
                 
 
@@ -180,7 +192,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                     console.log(card);
                                     return (
                                             <Grid container style={{ display:"flex", flexDirection:"column", marginBottom:20}}>
-                                                <Typography style={{ textAlign: "center", textDecoration: 'underline', marginLeft: 20, fontSize: 20, cursor: "pointer" }} onClick={() => { navigate("/Employer/" + card.id) }}>{card.title}</Typography>
+                                                <Typography style={{ textAlign: "center", textDecoration: 'underline', marginLeft: 20, fontSize: 20, cursor: "pointer" }} onClick={() => { navigate("/PaperInfoPage/" + card.id) }}>{card.title}</Typography>
                                                 <Typography > {"Description: "}{card.description}</Typography>
                                                 <Typography > {"Publication date: "}{card.date.substring(0,10)}</Typography>
                                                 <Divider style={{marginTop:20}}></Divider>
@@ -205,7 +217,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                     console.log(card.name);
                                     return (
                                             <Grid item >
-                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/Employer/" + card.id) }}>
+                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
                             
                                                 <CardMedia />
                                                 <Grid container spacing={3}  >
@@ -246,7 +258,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                     console.log(card);
                                     return (
                                         <Grid item >
-                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/Employer/" + card.id) }}>
+                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
                             
                                                 <CardMedia />
                                                 <Grid container spacing={3}  >

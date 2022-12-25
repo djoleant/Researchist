@@ -66,7 +66,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     const { id } = useParams();
 
     const getInfo = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingInfo/13");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingInfo/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -77,7 +77,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingPeople = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPeople/13");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPeople/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -88,7 +88,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingReviewers = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingReviewers/13");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingReviewers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -99,7 +99,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
     }
 
     const getProceedingPapers = async () => {
-        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPapers/13");
+        const response = await fetch("http://localhost:5211/api/HomeController1/GetProceedingPapers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)
@@ -182,7 +182,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
                                     console.log(card.name);
                                     return (
                                             <Grid item >
-                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/Employer/" + card.id) }}>
+                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
                             
                                                 <CardMedia />
                                                 <Grid container spacing={3}  >
@@ -223,7 +223,7 @@ export default function ProceedingPage({ type, reloadHeader }) {
                                     console.log(card);
                                     return (
                                         <Grid item >
-                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/Employer/" + card.id) }}>
+                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
                             
                                                 <CardMedia />
                                                 <Grid container spacing={3}  >
