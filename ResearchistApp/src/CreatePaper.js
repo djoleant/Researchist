@@ -63,28 +63,28 @@ export default function PaperCreator() {
         }
         const paper = await resp1.json();
         for (let i = 0; i < values.categories.length; i++) {
-            fetch("http://localhost:5211/api/HomeController2/Has/" + paper.id + "/" + values.categories[i].id, { method: "POST" }).then(r => {
+            fetch("http://localhost:5211/api/Relations/Has/" + paper.id + "/" + values.categories[i].id, { method: "POST" }).then(r => {
                 if (!r.ok) {
                     alert("An error occured while adding category: ", values.categories[i].id)
                 }
             })
         }
         for (let i = 0; i < values.references.length; i++) {
-            fetch("http://localhost:5211/api/HomeController2/References/" + paper.id + "/" + values.references[i].id, { method: "POST" }).then(r => {
+            fetch("http://localhost:5211/api/Relations/References/" + paper.id + "/" + values.references[i].id, { method: "POST" }).then(r => {
                 if (!r.ok) {
                     alert("An error occured while adding reference: ", values.references[i].id)
                 }
             })
         }
         for (let i = 0; i < values.authors.length; i++) {
-            fetch("http://localhost:5211/api/HomeController2/Writes/" + values.authors[i].id + "/" + paper.id, { method: "POST" }).then(r => {
+            fetch("http://localhost:5211/api/Relations/Writes/" + values.authors[i].id + "/" + paper.id, { method: "POST" }).then(r => {
                 if (!r.ok) {
                     alert("An error occured while adding author: ", values.authors[i].id)
                 }
             })
         }
         for (let i = 0; i < values.reviewers.length; i++) {
-            fetch("http://localhost:5211/api/HomeController2/Reviews/" + values.reviewers[i].id + "/" + paper.id, { method: "POST" }).then(r => {
+            fetch("http://localhost:5211/api/Relations/Reviews/" + values.reviewers[i].id + "/" + paper.id, { method: "POST" }).then(r => {
                 if (!r.ok) {
                     alert("An error occured while adding reviewer: ", values.reviewers[i].id)
                 }
