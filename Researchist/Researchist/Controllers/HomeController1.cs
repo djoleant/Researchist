@@ -67,11 +67,16 @@ namespace Researchist.Controllers
         [Route("AddPaper/{title}/{description}/{date}/{link}")]   // 17
         public async Task<IActionResult> AddPaper(string title, string description, DateTime date, string link)
         {
-            await client.Cypher.Create("(paper:Paper {title:\"" + title + "\",description:\"" + description + "\",date:\"" + date + "\",link:\"" + link + "\"})")
-                .ExecuteWithoutResultsAsync();
+            var result = client.Cypher
+                .Create("(paper:Paper {title:\"" + title + "\",description:\"" + description + "\",date:\"" + date + "\",link:\"" + link + "\"})")
+                //.ExecuteWithoutResultsAsync();
+                .Set("paper.id=id(paper)")
+                .Return(paper => paper.As<Paper>());
+
+            var paper = (await result.ResultsAsync).FirstOrDefault();
 
             NormalizeIDs();
-            return Ok();
+            return Ok(paper);
 
         }
 

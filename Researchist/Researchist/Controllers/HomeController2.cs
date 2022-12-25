@@ -88,17 +88,19 @@ namespace Researchist.Controllers
         }
 
         [HttpPost]
-        [Route("AddPerson/{name}/{surname}/{role}/{institution}/{contact}")]
-        public async Task<IActionResult> AddPerson(string name, string surname, PersonRole role, string institution, string contact)
+        [Route("AddPerson/{name}/{surname}/{role}/{institution}/{contact}/{profilePicture}")]
+        public async Task<IActionResult> AddPerson(string name, string surname, PersonRole role, string institution, string contact,string profilePicture)
         {
-            await client.Cypher
+            var result= client.Cypher
                 .Create("(person:Person {name: '" + name + "', surname: '" + surname +
-                "', role: '"+role+"', institution: '"+institution+"', contact: '"+contact+"'})")
+                "', role: '" + role + "', institution: '" + institution + "', contact: '" + contact + "', profilePicture: '" + profilePicture + "'})")
+                .Set("person.id=id(person)")
                 // .WithParams(new {name, surname, role, institution, contact})
-                .ExecuteWithoutResultsAsync();
-
-                NormalizeIDs();
-                return Ok();
+                //.ExecuteWithoutResultsAsync();
+                .Return(person => person.As<Person>());
+            NormalizeIDs();
+            var person = (await result.ResultsAsync).FirstOrDefault();
+            return Ok(person);
         }
 
 
