@@ -344,7 +344,7 @@ export default function App() {
             }
           />
           <Route
-            path="/Search"
+            path="/Search/:param"
             element={
               <Header
                 Component={Search}
