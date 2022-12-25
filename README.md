@@ -48,5 +48,3 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 | NEO4J_DATABASE | neo4j |
 | NEO4J_VERSION | 5.2 |
 
-</br>
-<img src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" data-canonical-src="https://user-images.githubusercontent.com/48065134/207616558-b54e32f1-556e-4553-b0e8-8cf7b12f7aa8.png" width="280" height="240" />
