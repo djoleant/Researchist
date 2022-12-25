@@ -94,7 +94,7 @@ export default function HomePage(props) {
                         <Button
                             sx={{ m: 1, borderRadius: 50, backgroundColor:"#7E32B0" }}
                             variant="contained"
-                            href="https://yahoo.com" //ovo treba da vodi do djoletove stranice
+                            href={"/Search/" + search}  //ovo treba da vodi do djoletove stranice
                         >
                             {" "}
                             <SearchIcon size="large" />
