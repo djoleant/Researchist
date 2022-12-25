@@ -26,7 +26,7 @@ export default function PaperCard({
                 <Grid container item xs={12}>
 
                     <Grid item xs={10} sx={{ display: "flex", flexDirection: "row" }}>
-                        <Link href={"http://" + link} variant="h5" align="left" sx={{ align: "left" }}>{title}</Link>
+                        <Link href={link} variant="h5" align="left" sx={{ align: "left" }}>{title}</Link>
                     </Grid>
                     <Grid item xs={2} sx={{ display: "flex", flexDirection: "row-reverse" }}>
                         <Checkbox

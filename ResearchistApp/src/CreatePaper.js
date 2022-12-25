@@ -10,10 +10,6 @@ import {
     CircularProgress
 } from '@mui/material';
 import { Formik, Form } from 'formik';
-// import PersonalInfoForm from './components/CVForms/PersonalInfoForm';
-// import ProfessionalSkillsForm from './components/CVForms/ProfessionalSkillsForm';
-// import WorkExperienceForm from './components/CVForms/WorkExperienceForm';
-// import AdditionalInfoForm from './components/CVForms/AdditionalInfoForm';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import * as Yup from 'yup';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -31,8 +27,7 @@ const steps = ['Basic info', 'Categories', "Authors and reviewers", 'References'
 
 
 export default function PaperCreator() {
-    //const { children } = props;
-    //const classes = useStyle();
+    
     function _renderStepContent(step) {
         switch (step) {
             case 0:
@@ -51,7 +46,6 @@ export default function PaperCreator() {
     const navigate = useNavigate();
 
     const [activeStep, setActiveStep] = useState(0);
-    //const currentValidationSchema = validationSchema[activeStep];
     const isLastStep = activeStep === steps.length - 1;
 
     function _sleep(ms) {
@@ -59,27 +53,7 @@ export default function PaperCreator() {
     }
 
     async function _submitForm(values, actions) {
-        // await _sleep(1000);
-        // console.log(JSON.stringify(values, null, 2));
-        // actions.setSubmitting(false);
-
-        // setActiveStep(activeStep + 1);
-        // alert("Objekat je u console log")
-
-        // const response = await fetch("http://localhost:7240/CV/CreateCV", {
-        //     method: "POST",
-        //     credentials: "include",
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(values)
-        // })
-        // if (response.ok) {
-        //     const data = await response.json();
-        //     console.log(data);
-        //     setActiveStep(activeStep + 1);
-        // }
+        
         const resp1 = await fetch("http://localhost:5211/api/HomeController1/AddPaper/" +
             encodeURIComponent(values.title) + "/" + encodeURIComponent(values.description) + "/" +
             values.date + "/" + encodeURIComponent(values.link), { method: "POST" });
@@ -119,9 +93,7 @@ export default function PaperCreator() {
         setPaperID(paper.id);
         actions.setSubmitting(false);
         setActiveStep(activeStep + 1);
-        // values.categories.forEach(cat => {
-        //     const resp=await fetch()
-        // })
+        
 
     }
 
@@ -145,6 +117,7 @@ export default function PaperCreator() {
         title: "",
         description: "",
         date: "",
+        link:"",
         categories: [],
         references: [],
         authors: [],
@@ -152,51 +125,14 @@ export default function PaperCreator() {
 
     });
 
-    const cvValidationSchema = Yup.object().shape({
+    const paperValidationSchema = Yup.object().shape({
         title: Yup.string().required("The title is required"),
         description: Yup.string().required("Description is required"),
         date: Yup.date().required("The date is required"),
-        link: Yup.string(),
-        // city: Yup.string().required("The city is required is required"),
-        // education: Yup.array()
-        //     .of(
-        //         Yup.object()
-        //             .shape({
-        //                 title: Yup.string().required("The title of your education is required"),
-        //                 institutionName: Yup.string().required("The name of the institution is required"),
-        //                 fromDate: Yup.string().required("The date is required"),
-        //                 toDate: Yup.string().required("The date is required")
-        //             })),
-        // languages: Yup.array()
-        //     .of(
-        //         Yup.object().shape({
-        //             title: Yup.string().required("The name of the language is required"),
-        //             description: Yup.string().required("The level is required")
-        //         })
-        //     ),
-        // experience: Yup.array()
-        //     .of(
-        //         Yup.object().shape({
-        //             title: Yup.string().required("The position is required"),
-        //             institutionName: Yup.string().required("The name of the company is required"),
-        //             fromDate: Yup.string().required("The date is required"),
-        //             toDate: Yup.string().required("The date is required")
-        //         })
-        //     ),
-        // additionalInfo: Yup.array()
-        //     .of(
-        //         Yup.object().shape({
-        //             title: Yup.string().required("The title of the additional information is required"),
-        //             description: Yup.string().required("The description is required"),
-        //             type: Yup.string().required("The type of the additional information is required")
-        //         })
-        //     )
+        link: Yup.string().matches('http(s)?://.*',"http(s) is required"),
+        
     })
 
-    useEffect(() => {
-        // getSkills();
-        // getCvData();
-    }, []);
 
     return (
 
@@ -244,7 +180,7 @@ export default function PaperCreator() {
                                 paperData
                             }
                             enableReinitialize
-                            //validationSchema={cvValidationSchema}
+                            validationSchema={paperValidationSchema}
                             onSubmit={_handleSubmit}
                         >
                             {({ isSubmitting }) => (
