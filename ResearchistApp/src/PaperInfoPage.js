@@ -160,6 +160,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                             currentTitle={info.title}
                             currentDescription={info.description}
                             update={update}
+                            id={info.id}
                     />
                     <DeletePaperDialog
                             id={info.id}

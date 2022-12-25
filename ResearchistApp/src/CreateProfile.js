@@ -60,7 +60,7 @@ export default function CreateProfile() {
             student: 1,
             other: 2
         }
-        fetch(`http://localhost:5211/api/HomeController2/AddPerson/${data.get("name")}/${data.get("surname")}/${roles[role]}/${encodeURIComponent(data.get("institution"))}/${encodeURIComponent(data.get("contact"))}/${encodeURIComponent(data.get("profilePicture"))}`, {
+        fetch(`http://localhost:5211/api/HomeController2/AddPerson/${data.get("name")}/${data.get("surname")}/${roles[role]}/${encodeURIComponent(data.get("institution"))}/${encodeURIComponent(data.get("contact"))}`, {
             method: "POST"
         }).then(r => {
             if (r.ok) {
@@ -169,7 +169,7 @@ export default function CreateProfile() {
                                 autoComplete="institution"
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -178,7 +178,7 @@ export default function CreateProfile() {
                                 name="profilePicture"
                                 autoComplete="profilePicture"
                             />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12}>
                             <TextField
                                 required

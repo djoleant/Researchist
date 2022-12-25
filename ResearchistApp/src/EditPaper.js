@@ -11,7 +11,7 @@ import { Typography, TextField, Box, Avatar } from '@mui/material';
 import EditIcon from '@mui/icons-material/EditRounded';
 import { useState } from 'react';
 
-export default function EditPaperDialog({ currentTitle, currentDescription, update }) {
+export default function EditPaperDialog({ currentTitle, currentDescription, update,id }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -22,20 +22,27 @@ export default function EditPaperDialog({ currentTitle, currentDescription, upda
     };
 
     const handleSubmit = () => {
-        let fetchreq = "http://localhost:5211/api/Home/UpdatePaper/5/"+title+"/"+description;
+        let fetchreq = "http://localhost:5211/api/Home/UpdatePaper/"+id+"/"+title+"/"+description;
         fetchreq = encodeURI(fetchreq);
+        console.log(fetchreq)
         fetch(fetchreq, {
             method: "PUT",
             credentials: "include"
         }).then(response => {
-            response.json().then(data => {
-                if (data.succeeded) {
-                    alert("Success");
-                }
-                else {
-                    alert("Changes were not successful");
-                }
-            })
+            // response.json().then(data => {
+            //     if (data.succeeded) {
+            //         alert("Success");
+            //     }
+            //     else {
+            //         alert("Changes were not successful");
+            //     }
+            // })
+            if (response.ok) {
+                alert("Success");
+            }
+            else {
+                alert("Changes were not successful");
+            }
             update();
             handleClose();
         })

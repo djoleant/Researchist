@@ -88,12 +88,12 @@ namespace Researchist.Controllers
         }
 
         [HttpPost]
-        [Route("AddPerson/{name}/{surname}/{role}/{institution}/{contact}/{profilePicture}")]
-        public async Task<IActionResult> AddPerson(string name, string surname, PersonRole role, string institution, string contact,string profilePicture)
+        [Route("AddPerson/{name}/{surname}/{role}/{institution}/{contact}")]
+        public async Task<IActionResult> AddPerson(string name, string surname, PersonRole role, string institution, string contact)
         {
             var result= client.Cypher
                 .Create("(person:Person {name: '" + name + "', surname: '" + surname +
-                "', role: '" + role + "', institution: '" + institution + "', contact: '" + contact + "', profilePicture: '" + profilePicture + "'})")
+                "', role: '" + role + "', institution: '" + institution + "', contact: '" + contact + "'})")
                 .Set("person.id=id(person)")
                 // .WithParams(new {name, surname, role, institution, contact})
                 //.ExecuteWithoutResultsAsync();

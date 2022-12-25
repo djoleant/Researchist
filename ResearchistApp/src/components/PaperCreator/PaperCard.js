@@ -1,10 +1,5 @@
 import { Button, Card, Divider, Typography, Grid, Checkbox, Link } from "@mui/material";
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import PaidIcon from '@mui/icons-material/Paid';
-import SkillChips from "../InternshipPage/SkillChips";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

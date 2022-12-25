@@ -50,65 +50,19 @@ export const Header = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [role, setRole] = useState(localStorage.getItem("role"));
-  const [username, setUsername] = useState(localStorage.getItem("username"));
-  const [picture, setPicture] = useState(localStorage.getItem("picture"));
+  
 
   const theme = useTheme();
 
   const reloadHeader = () => {
-    setRole(localStorage.getItem("role"));
-    setUsername(localStorage.getItem("username"));
-    setPicture(localStorage.getItem("picture"));
+    
     handleCloseUserMenu();
   }
 
-  const handleMenuClick = async (option) => {
-    console.log(option);
-    if (option === "Logout") {
-      //await logout();
-      localStorage.setItem("role", "Guest");
-      reloadHeader();
-      navigate("/SignIn")
-    } else if (option === "Account") {
-      navigate("/MyAccount");
-    }
-    else if (option === "CV Creator") {
-      navigate("/CVCreator")
-    }
-    else if (option === "CV Export") {
-      navigate("/CVGenerator")
-    }
-    else if (option === "Admin Dashboard") {
-      navigate("/AdminDashboard")
-    }
-    else if (option === "Post internship") {
-      navigate("/InternshipCreator");
-    }
-  }
+ 
   return (
     <React.Fragment>
-      <AppBar sx={{ display: location.pathname.includes("/Chat") ? "none" : "" }} position="sticky">
-        <Container
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography style={{ justifySelf: "center" }}>
-            Runtime Terror stands in solidarity with the Ukrainan people. {"  "}{" "}
-            <Link
-              style={{ color: theme.palette.secondary.main }}
-              href="https://war.ukraine.ua/support-ukraine/"
-            >
-              {" "}
-              Find out how you can help.
-            </Link>
-          </Typography>
-        </Container>
-      </AppBar>
+
       <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -178,73 +132,11 @@ export const Header = (props) => {
             </Box>
 
 
-            {
-              (role !== "Guest") ?
+            
                 <>
-                  <MenuItem>
-                    <IconButton
-                      size="large"
-                      aria-label="show 4 new mails"
-                      color="inherit"
-                      onClick={() => { navigate("/Chat") }}
-                    >
-                      <MailIcon />
-                    </IconButton>
-                  </MenuItem>
-
-                  <Box sx={{ flexGrow: 0 }}>
-                    <Tooltip title="Open settings">
-                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar alt="Remy Sharp" src={process.env.PUBLIC_URL + "/resources/" + picture} />
-                      </IconButton>
-                    </Tooltip>
-                    <Menu
-                      sx={{ mt: "45px" }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-                      <MenuItem >
-                        <Typography sx={{ fontWeight: "bold" }}>{username}</Typography>
-                      </MenuItem>
-                      <Divider sx={{ ml: 1, mr: 1 }} />
-                      {settings
-                        .filter((setting) => {
-                          if (role === "Employer") {
-                            return setting !== "CV Creator" && setting != "CV Export" && setting !== "Admin Dashboard";
-                          }
-                          if (role === "Admin") {
-                            return setting !== "CV Creator" && setting != "CV Export" && setting !== "Post internship";
-                          }
-                          if (role === "Student") {
-                            return setting !== "Admin Dashboard" && setting !== "Post internship";
-                          }
-                          return true;
-                        })
-                        .map((setting) => (
-                          <MenuItem key={setting} onClick={() => { handleMenuClick(setting) }}>
-                            <Typography textAlign="center">{setting}</Typography>
-                          </MenuItem>
-                        ))}
-
-                      <MenuItem onClick={ThemeHandler}>
-                        <Switch checked={localStorage.getItem("mode") === "dark"} />
-
-                      </MenuItem>
-                    </Menu>
-                  </Box>
-                </> :
-                <>
+                  <MenuItem onClick={() => { navigate("/CreateProfile/student") }}>
+                    <Typography textAlign="center">Create Profile</Typography>
+                  </MenuItem >
                   <MenuItem onClick={() => { navigate("/Createpaper") }}>
                     <Typography textAlign="center">Create Paper</Typography>
                   </MenuItem >
@@ -252,7 +144,6 @@ export const Header = (props) => {
                     <Switch checked={localStorage.getItem("mode") === "dark"} />
                   </MenuItem>
                 </>
-            }
           </Toolbar>
         </Container>
       </AppBar>
