@@ -44,7 +44,7 @@ export default function CardList({ type }) {
             title={type === "papers" ? info.title : info.name+" "+ info.surname}
             description={type === "papers" ? info.description : info.institution}
             date={type === "papers" ? info.date.split("T")[0] : info.contact}
-            link={type === "papers" ? info.link : "localhost:3000/ProfilePage/" + info.id}
+            link={type === "papers" ? "localhost:3000/PaperInfoPage/" + info.id : "localhost:3000/ProfilePage/" + info.id}
           />
         </Grid>
       ))}
