@@ -98,7 +98,7 @@ namespace Researchist.Controllers
             var query1 = client.Cypher
                 .Match("(p:Paper)-[r:HAS]->(c:Category)")
                 .Where(whereParams)
-                .Return(p => p.As<Paper>());
+                .ReturnDistinct(p => p.As<Paper>());
             var papers = new List<Paper>();
             foreach (var paper in await query1.ResultsAsync)
                 papers.Add(paper);

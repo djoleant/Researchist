@@ -75,7 +75,6 @@ export default function PaperCreator() {
         //     },
         //     body: JSON.stringify(values)
         // })
-        // actions.setSubmitting(false);
         // if (response.ok) {
         //     const data = await response.json();
         //     console.log(data);
@@ -83,11 +82,43 @@ export default function PaperCreator() {
         // }
         const resp1 = await fetch("http://localhost:5211/api/HomeController1/AddPaper/" +
             encodeURIComponent(values.title) + "/" + encodeURIComponent(values.description) + "/" +
-            values.date + "/" + encodeURIComponent(values.link));
+            values.date + "/" + encodeURIComponent(values.link), { method: "POST" });
         if (!resp1.ok) {
-            alert("Greska u kreiranju rada!");
+            alert("Paper creation failed!");
             return;
         }
+        const paper = await resp1.json();
+        for (let i = 0; i < values.categories.length; i++) {
+            fetch("http://localhost:5211/api/HomeController2/Has/" + paper.id + "/" + values.categories[i].id, { method: "POST" }).then(r => {
+                if (!r.ok) {
+                    alert("An error occured while adding category: ", values.categories[i].id)
+                }
+            })
+        }
+        for (let i = 0; i < values.references.length; i++) {
+            fetch("http://localhost:5211/api/HomeController2/References/" + paper.id + "/" + values.references[i].id, { method: "POST" }).then(r => {
+                if (!r.ok) {
+                    alert("An error occured while adding reference: ", values.references[i].id)
+                }
+            })
+        }
+        for (let i = 0; i < values.authors.length; i++) {
+            fetch("http://localhost:5211/api/HomeController2/Writes/" + values.authors[i].id + "/" + paper.id, { method: "POST" }).then(r => {
+                if (!r.ok) {
+                    alert("An error occured while adding author: ", values.authors[i].id)
+                }
+            })
+        }
+        for (let i = 0; i < values.reviewers.length; i++) {
+            fetch("http://localhost:5211/api/HomeController2/Reviews/" + values.reviewers[i].id + "/" + paper.id, { method: "POST" }).then(r => {
+                if (!r.ok) {
+                    alert("An error occured while adding reviewer: ", values.reviewers[i].id)
+                }
+            })
+        }
+        setPaperID(paper.id);
+        actions.setSubmitting(false);
+        setActiveStep(activeStep + 1);
         // values.categories.forEach(cat => {
         //     const resp=await fetch()
         // })
@@ -108,31 +139,8 @@ export default function PaperCreator() {
         setActiveStep(activeStep - 1);
     }
 
-    // const getSkills = async () => {
-    //     const response = await fetch("http://localhost:7240/CV/GetSkills", {
-    //         credentials: "include"
-    //     });
-    //     if (response.ok) {
-    //         const fetchData = await response.json();
-    //         setSkillData(fetchData.skills);
-    //     }
+    const [paperID,setPaperID] = useState(0);
 
-    // }
-
-    // const getCvData = async () => {
-    //     const response = await fetch("http://localhost:7240/CV/GetCV", {
-    //         credentials: "include",
-    //         method: "POST"
-    //     });
-    //     if (response.ok) {
-    //         const fetchData = await response.json();
-    //         if (fetchData.cv.education.length > 0)
-    //             setCvData(fetchData.cv);
-    //     }
-
-    // }
-
-    const [skillData, setSkillData] = useState([]);
     const [paperData, setPaperData] = useState({
         title: "",
         description: "",
@@ -219,15 +227,15 @@ export default function PaperCreator() {
                             <Typography component="h1" variant="h2" align="center">
                                 <CheckCircleOutlineRoundedIcon color="success" sx={{ fontSize: 100, mt: 10 }} />
                                 <br />
-                                CV successfully created
+                                Paper successfully created
                             </Typography>
                             <Button
                                 variant="contained"
                                 size="large"
                                 sx={{ mt: 7, fontSize: 20, textDecoration: "none" }}
-                                onClick={() => { navigate("/CVGenerator") }}
+                                onClick={() => { navigate("/PaperInfoPage/" + paperID) }}
                             >
-                                View CV
+                                View Paper
                             </Button>
                         </>
                     ) : (
