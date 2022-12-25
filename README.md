@@ -14,6 +14,7 @@ Researchist is student project done for Advanced Databases subject at Faculty of
 ## 📦 Stack
 * Neo4jClient
 * Asp.net WebApi
+* React (JS)
 
 ## 🚀 Quickstart
 
