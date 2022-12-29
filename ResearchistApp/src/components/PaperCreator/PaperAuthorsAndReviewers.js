@@ -41,7 +41,7 @@ export default function AuthorsAndReviewers() {
     ]);
 
     const getPeople = async () => {
-        const response = await fetch("http://localhost:5211/api/Home/GetAllPeople");
+        const response = await fetch("http://localhost:5211/api/Person/GetAllPeople");
         if (response.ok) {
             const fetchData = await response.json();
             setPeople(fetchData);

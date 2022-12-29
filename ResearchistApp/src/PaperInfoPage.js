@@ -93,7 +93,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
     }
 
     const getPaperReviewers = async () => {
-        const response = await fetch("http://localhost:5211/api/Home/GetPaperReviewers/"+id);
+        const response = await fetch("http://localhost:5211/api/Paper/GetPaperReviewers/"+id);
         if (response.ok) {
             const fetchData = await response.json();
             console.log(fetchData)

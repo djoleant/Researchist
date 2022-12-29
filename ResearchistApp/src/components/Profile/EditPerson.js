@@ -35,39 +35,11 @@ export default function EditStudentProfileDialog({
         setOpen(false);
     };
 
-    // const handleSubmit = () => {
-    //     console.log(id, name, surname, contact);
-    //     fetch(
-    //         "http://localhost:5211/api/Home/UpdatePerson/" +
-    //         id +
-    //         "/"+
-    //         name +
-    //         "/" +
-    //         surname +
-    //         "/" +
-    //         contact,
-    //         {
-    //             method: "PUT",
-    //             credentials: "include",
-    //         }
-    //     ).then((response) => {
-    //         response.json().then((data) => {
-    //             if (data.succeeded) {
-    //                 localStorage.setItem("picture", filename);
-    //                 update();
-    //             } else {
-    //                 alert("Changes were not successful");
-    //             }
-    //             handleClose();
-    //         });
-    //     });
-    //     //alert(fileInput.current.files[0].name)
-    // };
 
     async function handleSubmit() {
         console.log(id, name, surname, contact);
         const response = await fetch(
-            "http://localhost:5211/api/Home/UpdatePerson/" +
+            "http://localhost:5211/api/Person/UpdatePerson/" +
             id +
             "/"+
             name +

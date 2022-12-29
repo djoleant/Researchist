@@ -48,7 +48,7 @@ export default function References() {
         values.categories.forEach(cat => {
             categoriesQuery += "categoryIDs=" + cat.id + "&";
         })
-        const response = await fetch("http://localhost:5211/api/Home/GetCategoryPapers?" + categoriesQuery);
+        const response = await fetch("http://localhost:5211/api/Category/GetCategoryPapers?" + categoriesQuery);
         if (response.ok) {
             const fetchData = await response.json();
             setPapers(fetchData);
