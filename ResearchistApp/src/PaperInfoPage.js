@@ -217,29 +217,30 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                     const { id, name, surname, role, institution, contact, profilePicture } = card;
                                     console.log(card.name);
                                     return (
-                                            <Grid item >
-                                              <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
-                            
-                                                <CardMedia />
-                                                <Grid container spacing={3}  >
-                                                    <Grid item xs={12} md={2} sx={{ display: "flex", justifyContent: "left" }}>
-                                                    <Avatar src={process.env.PUBLIC_URL + "/resources/" + info.picture} sx={{ width: 140, height: 140, ml:1, mt:1 }} />
-                                                    </Grid>
-                                                <Grid item xs={12} md={10}>
-                                                <Typography style={{marginRight:30, marginBottom:10, marginTop:10}} variant='h5' align="right">{card.surname + ", "+ card.name}</Typography>
-                                                <Divider  style={{marginBottom:10}}></Divider>
-                                                <Typography style={{marginLeft:20, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><AssuredWorkloadIcon style={{marginRight:2}}/>{"Institution: "}</Typography>
-                                                <Typography style={{marginLeft:30,marginBottom:10,  display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.institution}</Typography>
-                                                <Typography style={{marginLeft:5, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><ContactMailIcon style={{marginRight:2}}/>{"Contact: "}</Typography>
-                                                <Typography style={{marginLeft:30, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.contact}</Typography>
-                                                </Grid>
+                                        <Grid item >
+                                        <Card key={index} style={{ width: 350, height: 230, cursor: "pointer" }} onClick={() => { navigate("/ProfilePage/" + card.id) }}>
+                      
+                                          <CardMedia />
+                                          <Grid container spacing={3}  >
+                                              <Grid item xs={12} md={2} sx={{ display: "flex", justifyContent: "left" }}>
+                                              <Avatar src={decodeURIComponent(card.profilePicture)} sx={{ width: 80, height: 80, ml:1, mt:1 }} />
+                                              </Grid>
+                                          <Grid item xs={12} md={10}>
+                                          <Grid>
+                                          <Typography style={{marginRight:20, marginBottom:10, marginTop:10}} variant='h5' align="right">{card.surname + ", "+ card.name}</Typography>
+                                          </Grid>
+                                          <Divider  style={{marginBottom:10}}></Divider>
+                                          <Typography style={{marginLeft:10, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><AssuredWorkloadIcon style={{marginRight:2}}/>{"Institution: "}</Typography>
+                                          <Typography style={{marginLeft:10,marginBottom:10,  display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.institution}</Typography>
+                                          <Typography style={{marginLeft:5, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><ContactMailIcon style={{marginRight:2}}/>{"Contact: "}</Typography>
+                                          <Typography style={{marginLeft:10, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.contact}</Typography>
+                                          </Grid>
 
-                                            </Grid>
-                                                
-                                                <CardActions style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" }}>
-                                                </CardActions>
-                                              </Card>
-                                            </Grid>
+                                      </Grid>
+                                      <CardActions style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" }}>
+                                          </CardActions>
+                                        </Card>
+                                      </Grid>
                                           );
                                 })}
                         </Grid>
@@ -264,15 +265,17 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                                 <CardMedia />
                                                 <Grid container spacing={3}  >
                                                     <Grid item xs={12} md={2} sx={{ display: "flex", justifyContent: "left" }}>
-                                                    <Avatar src={process.env.PUBLIC_URL + "/resources/" + info.picture} sx={{ width: 140, height: 140, ml:1, mt:1 }} />
+                                                    <Avatar src={decodeURIComponent(card.profilePicture)} sx={{ width: 80, height: 80, ml:1, mt:1 }} />
                                                     </Grid>
                                                 <Grid item xs={12} md={10}>
-                                                <Typography style={{marginRight:30, marginBottom:10, marginTop:10}} variant='h5' align="right">{card.surname + ", "+ card.name}</Typography>
+                                                <Grid>
+                                                <Typography style={{marginRight:20, marginBottom:10, marginTop:10}} variant='h5' align="right">{card.surname + ", "+ card.name}</Typography>
+                                                </Grid>
                                                 <Divider  style={{marginBottom:10}}></Divider>
-                                                <Typography style={{marginLeft:20, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><AssuredWorkloadIcon style={{marginRight:2}}/>{"Institution: "}</Typography>
-                                                <Typography style={{marginLeft:30,marginBottom:10,  display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.institution}</Typography>
+                                                <Typography style={{marginLeft:10, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><AssuredWorkloadIcon style={{marginRight:2}}/>{"Institution: "}</Typography>
+                                                <Typography style={{marginLeft:10,marginBottom:10,  display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.institution}</Typography>
                                                 <Typography style={{marginLeft:5, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right"><ContactMailIcon style={{marginRight:2}}/>{"Contact: "}</Typography>
-                                                <Typography style={{marginLeft:30, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.contact}</Typography>
+                                                <Typography style={{marginLeft:10, display:"flex", justifyContent:"center", alignItems:"flex-end"}} align="right">{card.contact}</Typography>
                                                 </Grid>
 
                                             </Grid>
