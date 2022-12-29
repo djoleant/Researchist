@@ -137,7 +137,7 @@ namespace Researchist.Controllers
             var result = client.Cypher
                 .Match("(person:Person)-[:WRITES]->(paper:Paper)-[:HAS]->(category:Category)")
                 .Where("id(category)=" + categoryID)
-                .Return(person => person.As<Person>());
+                .ReturnDistinct(person => person.As<Person>());
 
             var lista = new List<Person>();
             foreach (var person in await result.ResultsAsync)
