@@ -26,7 +26,7 @@ export default function Search(props) {
   const { id, param } = useParams();
   const getSearchData = async () => {
     const response = await fetch(
-      "http://localhost:5211/api/Home/Search/" + param,
+      "http://localhost:5211/api/Paper/Search/" + param,
       {
         credentials: "include",
         method: "GET",

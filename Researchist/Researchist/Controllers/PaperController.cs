@@ -51,6 +51,34 @@ namespace Researchist.Controllers
 
         }
 
+        [HttpGet]
+        [Route("Search/{searchParam}")]
+        public async Task<IActionResult> Search(string searchParam) // 1
+        {
+            var query1 = client.Cypher
+                .Match("(p:Person)")
+                .Where((Person p) => p.Name.Contains(searchParam) || p.Surname.Contains(searchParam))
+                .Return(p => p.As<Person>());
+            var people = new List<Person>();
+            foreach (var person in await query1.ResultsAsync)
+                people.Add(person);
+            var query2 = client.Cypher
+                .Match("(p:Paper)")
+                .Where((Paper p) => p.Title.Contains(searchParam))
+                .Return(p => p.As<Paper>());
+            var papers = new List<Paper>();
+            foreach (var paper in await query2.ResultsAsync)
+                papers.Add(paper);
+
+
+            return Ok(new { People = people, Papers = papers });
+
+ 
+
+        }
+
+        
+
         [HttpPut]
         [Route("UpdatePaper/{id}/{title}/{description}")]
         public async Task<IActionResult> UpdatePaper(int id, string title, string description) // 16
