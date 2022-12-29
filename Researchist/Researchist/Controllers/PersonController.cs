@@ -62,7 +62,19 @@ namespace Researchist.Controllers
                 .WithParams(new { id, name, surname, contact })
                 .ExecuteWithoutResultsAsync();
             return Ok();
+        }
 
+        [HttpPut]
+        [Route("UpdatePersonPhoto/{id}/{link}")]
+        public async Task<IActionResult> UpdatePersonPhoto(int id, string link) // 7
+        {
+            await client.Cypher
+                .Match("(n:Person)")
+                .Where("id(n)=" + id)
+                .Set("n.profilePicture=$link")
+                .WithParams(new { id, link })
+                .ExecuteWithoutResultsAsync();
+            return Ok();
         }
 
 
