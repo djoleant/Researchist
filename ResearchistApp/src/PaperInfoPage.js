@@ -193,7 +193,7 @@ export default function PaperInfoPage({ type, reloadHeader }) {
                                     console.log(card);
                                     return (
                                             <Grid container style={{ display:"flex", flexDirection:"column", marginBottom:20}}>
-                                                <Typography style={{ textAlign: "center", textDecoration: 'underline', marginLeft: 20, fontSize: 20, cursor: "pointer" }} onClick={() => { navigate("/PaperInfoPage/" + card.id) }}>{card.title}</Typography>
+                                                <Typography style={{ textAlign: "center", textDecoration: 'underline', marginLeft: 20, fontSize: 20, cursor: "pointer" }} onClick={() => { window.location=("http://localhost:3000/PaperInfoPage/" + card.id) }}>{card.title}</Typography>
                                                 <Typography > {"Description: "}{card.description}</Typography>
                                                 <Typography > {"Publication date: "}{card.date.substring(0,10)}</Typography>
                                                 <Divider style={{marginTop:20}}></Divider>
