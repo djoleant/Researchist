@@ -22,7 +22,7 @@ export default function EditPaperDialog({ currentTitle, currentDescription, upda
     };
 
     const handleSubmit = () => {
-        let fetchreq = "http://localhost:5211/api/Home/UpdatePaper/"+id+"/"+title+"/"+description;
+        let fetchreq = "http://localhost:5211/api/Paper/UpdatePaper/"+id+"/"+title+"/"+description;
         fetchreq = encodeURI(fetchreq);
         console.log(fetchreq)
         fetch(fetchreq, {
