@@ -1,4 +1,4 @@
-# Researchist
+# Researchist ![Neo4J](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)
 Researchist is student project done for Advanced Databases subject at Faculty of Electronic Engineering, University of Niš.
 
 ## ✨ Contributors (Student, ID)
