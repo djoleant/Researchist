@@ -45,7 +45,7 @@
 - Kreiranje profila (4)
   - samo unos osnovnih info
 
-## Backend (MEĐ)
+## Backend
 
 ### Arhitektura
 
